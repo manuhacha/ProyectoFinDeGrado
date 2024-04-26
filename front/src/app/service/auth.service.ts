@@ -15,4 +15,11 @@ export class AuthService {
   signUpUser(user:any) {
     return this.http.post<any>(this.signUpUrl,user)
   }
+  loginUser(user:any) {
+    return this.http.post<any>(this.loginUpUrl,user)
+  }
+  //Comprobamos si el token esta guardado en el local Storage para saber si ha iniciado sesion
+  isLogged() {
+    return !!localStorage.getItem('token')
+  }
 }

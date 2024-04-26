@@ -26,3 +26,6 @@
     bottom: 0;
     width: 100%;
 }
+input {
+    width: 250px;
+}

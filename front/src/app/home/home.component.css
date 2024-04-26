@@ -28,6 +28,7 @@ body {
 }
 .botonalbums {
     margin-top: 80px;
+    border: none;
 }
 .albumtxt {
     font-size: 30px;

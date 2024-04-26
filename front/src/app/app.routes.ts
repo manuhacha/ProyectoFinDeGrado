@@ -5,6 +5,7 @@ import { SignupComponent } from './signup/signup.component';
 import { BandsComponent } from './bands/bands.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,7 @@ export const routes: Routes = [
     },
     {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [AuthGuard]
     }
 ];
