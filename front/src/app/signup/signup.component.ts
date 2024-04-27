@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule],
+  imports: [FormsModule,ReactiveFormsModule,NgIf],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.css'
 })
@@ -18,6 +19,7 @@ export class SignupComponent {
     password: '',
     repeatpassword: ''
   }
+  err:string = ''
 
   constructor(private auth: AuthService, private router: Router) { }
 
@@ -27,7 +29,7 @@ export class SignupComponent {
         next: (res) => {
           this.router.navigate(['/login'])
         },
-        error: (err) => console.log(err)
+        error: (err) => this.err = err.error
       })
   }
 }

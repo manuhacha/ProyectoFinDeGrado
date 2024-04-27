@@ -19,12 +19,6 @@ body {
 .home-img {
 width: 50px;
 }
-.showAlert, .showError, .exists {
-    margin-top: 20px;
-}
-.showAlert p, .showError p, .exists p {
-    padding-top: 13.5px;
-}
 .nav-link {
     color: white;
 }
@@ -32,4 +26,7 @@ width: 50px;
     position: absolute;
     bottom: 0;
     width: 100%;
+}
+.error {
+    font-weight: bold;
 }

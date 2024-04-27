@@ -9,3 +9,6 @@ body {
 .nav-link {
     color: white;
 }
+.logout {
+    cursor: pointer;
+}

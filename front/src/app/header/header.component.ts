@@ -17,4 +17,7 @@ constructor (private auth:AuthService) {}
 cambiarHeader(): boolean {
   return this.auth.isLogged();
 }
+logout() {
+  this.auth.logout()
+}
 }

@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule],
+  imports: [FormsModule,ReactiveFormsModule,NgIf,RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -16,6 +17,7 @@ export class LoginComponent {
     email: '',
     password: ''
   }
+  err:string = ''
 
   constructor(private auth:AuthService, private router: Router) { }
 
@@ -28,6 +30,7 @@ export class LoginComponent {
       },
       error: (err) => {
         console.log(err)
+        this.err = err.error
       }
     })
   }

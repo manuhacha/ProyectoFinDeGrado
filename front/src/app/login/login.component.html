@@ -12,9 +12,13 @@
         <label for="password" class="form-label">Password</label>
         <input type="password" [(ngModel)]="loginUser.password" class="form-control" id="password" name="password">
       </div>
+      <div class="signup">
+        <p class="text-center">Don't have an account? <a routerLink="/signup" class="d-inline-block mt-3">Sign up</a></p>
+      </div>
       <div class="mt-4 text-center">
         <button type="submit" (click)="login()" class="btn btn-primary">Sign in</button>
       </div>
+      <div *ngIf="err" class="error mt-3 text-danger text-center">{{this.err}}</div>
     </form>
   </div>
   </body>  

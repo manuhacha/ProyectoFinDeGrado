@@ -29,3 +29,6 @@
 input {
     width: 250px;
 }
+.error {
+    font-weight: bold;
+}
