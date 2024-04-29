@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 //Creamos la tabla Usuario con los campos necesarios
 const userSchema = new mongoose.Schema({
-    profilepicture: String,
+    profilepic: String,
     username: String,
     email: String,
     password: String,

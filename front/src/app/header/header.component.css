@@ -12,3 +12,17 @@ body {
 .logout {
     cursor: pointer;
 }
+.dropdown:hover>.dropdown-menu {
+    display: block;
+  }
+.dropdown>.dropdown-toggle:active {
+      pointer-events: none;
+  }
+.dropdown {
+    margin-right: 40px;
+}
+.profilepicture {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

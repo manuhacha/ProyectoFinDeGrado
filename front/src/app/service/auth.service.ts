@@ -15,6 +15,8 @@ export class AuthService {
 
   private getUrl = "http://localhost:3000/api/v1/user/"
 
+  private uploadPictureUrl = "http://localhost:3000/api/v1/user/upload"
+
   constructor(private http: HttpClient, private router: Router) { }
 
   signUpUser(user:any) {

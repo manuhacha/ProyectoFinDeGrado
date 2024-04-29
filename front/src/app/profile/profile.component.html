@@ -16,7 +16,7 @@
                 <div class="form-group p-1">
                   <label for="profilepic">Your profile picture:</label>
                   <img class="profile-photo mb-3 w-25 d-flex justify-content-center" alt="profile">              
-                  <input type="file" class="form-control" name="profilepic" accept="image/*">
+                  <input type="file" class="form-control" id="profilepic" name="profilepic" accept="image/*">
                 </div>
                 <div class="form-group p-1">
                   <label for="email">Email address</label>
@@ -24,20 +24,22 @@
                 </div>
                 <div class="form-group p-1">
                   <label for="username">Username</label>
-                  <input type="text" [(ngModel)]="updateUser.username" class="form-control" name="username" id="username" placeholder="Enter email">
+                  <input type="text" [(ngModel)]="updateUser.username" value="{{this.updateUser.username}}" class="form-control" name="username" id="username" placeholder="Enter email">
                 </div>
                 <div class="form-group p-1">
                   <label for="password">Previous Password</label>
-                  <input type="password" [(ngModel)]="updateUser.password" class="form-control" name="password" id="password" placeholder="Password">
+                  <input type="password" [(ngModel)]="oldpassword" class="form-control" name="oldpassword" id="password" placeholder="Password">
                 </div>
                 <div class="form-group p-1">
                   <label for="password">New Password</label>
-                  <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="Enter New Password">
+                  <input type="password" class="form-control" [(ngModel)]="newpassword" name="newpassword" id="newpassword" placeholder="Enter New Password">
                 </div>
                 <div class="form-group p-1">
                   <label for="password">Repeat New Password</label>
-                  <input type="password" class="form-control" name="repeatnewpassword" id="repeatnewpassword" placeholder="Repeat New Password">
+                  <input type="password" class="form-control" [(ngModel)]="repeatnewpassword" name="repeatnewpassword" id="repeatnewpassword" placeholder="Repeat New Password">
                 </div>
+                <div *ngIf="msg" class="error mt-3 text-success text-center">{{this.msg}}</div>
+                <div *ngIf="err" class="error mt-3 text-danger text-center">{{this.err}}</div>
                 <button type="submit" (click)="this.update()" class="btn btn-primary mt-3 d-flex mx-auto">Submit</button>
                 </form>
                 <div class="spotify-btn text-center m-4">
