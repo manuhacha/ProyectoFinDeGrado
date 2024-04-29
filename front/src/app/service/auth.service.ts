@@ -11,6 +11,10 @@ export class AuthService {
 
   private loginUpUrl = "http://localhost:3000/api/v1/auth"
 
+  private updateUrl = "http://localhost:3000/api/v1/user/"
+
+  private getUrl = "http://localhost:3000/api/v1/user/"
+
   constructor(private http: HttpClient, private router: Router) { }
 
   signUpUser(user:any) {
@@ -18,6 +22,12 @@ export class AuthService {
   }
   loginUser(user:any) {
     return this.http.post<any>(this.loginUpUrl,user)
+  }
+  updateUser(id:string,user:any) {
+    return this.http.put<any>(this.updateUrl + id,user)
+  }
+  getId(email:any) {
+    return this.http.get<any>(this.getUrl + email)
   }
   //Comprobamos si el token esta guardado en el local Storage para saber si ha iniciado sesion
   isLogged() {

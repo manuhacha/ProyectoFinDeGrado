@@ -2,7 +2,26 @@ const express = require('express');
 const router = express.Router();
 const {User} = require('../models/User');
 
-router.post('/', async(req,res)=>{
+//Hacemos el get para poder obtener los datos del cliente, y mirar si su contraseña antigua es correcta, por ejemplo, al actualizar el usuario
+router.get('/:email',async(req,res) => {
+  
+  try {
+    const {email} = req.params;
+    let user = await User.findOne({email: email});
+
+  if (user) {
+    res.status(200).send(user);
+  }
+  else {
+    res.status(400).send('User does not exists')
+  }
+  } catch (error) {
+    console.log(error);
+  }
+})
+
+//Creamos el método post para registrar un usuario
+router.post('/', async(req,res) => {
 
     //Buscamos si existe el correo o el usuario
     let user = await User.findOne({email: req.body.email});
@@ -12,6 +31,7 @@ router.post('/', async(req,res)=>{
     if (user || usernameexists) return res.status(400).send('Email or username already exists');
 
     user = new User({
+        profilepicture: req.body.profilepicture,
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
@@ -31,5 +51,44 @@ router.post('/', async(req,res)=>{
     }
     
 })
+//Creamos la ruta put para actualizar los datos del usuario, que gestionaremos en el apartado de profile
+router.put('/:id', async (req,res) => {
+    
+    const  { id }  = req.params;
+    const { password, username, email } = req.body;
+
+    try {
+
+        const usernameexists = await User.find({username: req.body.username});
+        const emailexists = await User.find({email: req.body.email});
+        
+        //Vemos si ese email o nombre de usuario existen, si es así, devolvemos el error
+        if (usernameexists.length > 1) {
+          return res.status(400).send('Username already exists');
+      }
+      if (emailexists.length > 1) {
+        return res.status(400).send('Email already exists');
+    }
+        // Busca al usuario por id
+        const user = await User.findByIdAndUpdate(id, {
+            password,
+            username,
+            email,
+          });
+
+        //Mira si existe el usuario y si no devuelve error
+        if (!user) {
+            return res.status(404).send('User not found');
+          }
+
+        else {
+        //Actualiza el usuario y devuelve el mensaje de éxito
+        res.status(200).send('User updated succesfully');
+        }
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Error updating user');
+      }
+    });
 
 module.exports = router;

@@ -26,6 +26,7 @@ export class LoginComponent {
     .subscribe({
       next: (res) => {
         localStorage.setItem('token',res.jwtToken)
+        localStorage.setItem('email',this.loginUser.email)
         this.router.navigate(['/'])
       },
       error: (err) => {
