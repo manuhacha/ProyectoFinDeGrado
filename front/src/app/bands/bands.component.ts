@@ -8,5 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './bands.component.css'
 })
 export class BandsComponent {
-
+  band = {
+    
+  }
 }

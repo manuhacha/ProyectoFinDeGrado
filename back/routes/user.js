@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../models/User");
 const upload = require("../middleware/file");
-const deletePhoto = require("../middleware/file");
+const fs = require('fs');
+const path = require('path');
 //Hacemos el get para poder obtener los datos del cliente, y mirar si su contraseña antigua es correcta, por ejemplo, al actualizar el usuario
 router.get("/:email", async (req, res) => {
   try {
@@ -50,48 +51,58 @@ router.post("/", async (req, res) => {
   }
 });
 //Creamos la ruta put para actualizar los datos del usuario, que gestionaremos en el apartado de profile
-router.put("/:id",upload.single("image"), async (req, res) => {
+router.put("/:id", upload.single("image"), async (req, res) => {
   const { id } = req.params;
-  const { password, username, email } = req.body;
+  const updateddata = req.body;
   let profilepic = null;
-  const url = req.protocol + "://" + req.get("host");
-  if (req.file.filename) {
-    profilepic = url + "/public/" + req.file.filename;
+
+  if (req.file && req.file.filename) {
+    profilepic = req.protocol + "://" + req.get("host") + "/public/" + req.file.filename;
+    updateddata.profilepic = profilepic; // Añadimos la foto a los datos que vamos a actualizar
   }
+
   try {
     const usernameexists = await User.find({ username: req.body.username });
     const emailexists = await User.find({ email: req.body.email });
-    const tienefoto = await User.find({profilepic: profilepic,email: req.body.email})
-    //Vemos si ese email o nombre de usuario existen, si es así, devolvemos el error
-    if (usernameexists.length > 1) {
-      return res.status(400).send("Username already exists");
+    //Vemos si hay otro usuario con ese correo o nombre de usuario
+    if ((usernameexists.length > 0 && usernameexists[0]._id.toString() !== id) ||(emailexists.length > 0 && emailexists[0]._id.toString() !== id)
+    ) {
+      return res.status(400).send("Email or username already exists");
     }
-    if (emailexists.length > 1) {
-      return res.status(400).send("Email already exists");
-    }
-    //Si tiene una foto asignada, borramos la foto anterior antes de añadir la nueva
-    if (tienefoto) {
-      deletePhoto(req.file.filename)
-    }
-    // Busca al usuario por id
-    const user = await User.findByIdAndUpdate(id, {
-      password,
-      username,
-      email,
-      profilepic
-    });
 
-    //Mira si existe el usuario y si no devuelve error
+    // Sacamos los datos del usuario por id
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).send("User not found");
-    } else {
-      //Actualiza el usuario y devuelve el mensaje de éxito
-      res.status(200).json("User updated succesfully and profilepic = " + profilepic);
     }
+
+    // Sacamos la foto de perfil que ya tiene
+    const haveprofilepic = user.profilepic;
+
+    // Vemos si el usuario tiene una foto de perfil ya asignada
+    if (haveprofilepic && haveprofilepic !== profilepic) {
+      // Sacamos el nombre del archivo
+      const filename = haveprofilepic.split("/").pop();
+      // Contruimos la ruta del archivo
+      const filePath = path.join(__dirname, "../public", filename);
+
+      // Borramos la foto
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error("Error deleting file:", err);
+        }
+      });
+    }
+
+    // Actualizamos al usuario
+    const updatedUser = await User.findByIdAndUpdate(id, updateddata);
+
+    res.status(200).json("User updated successfully and profilepic = " + profilepic);
   } catch (error) {
     console.error(error);
     res.status(500).send("Error updating user");
   }
 });
+
 
 module.exports = router;

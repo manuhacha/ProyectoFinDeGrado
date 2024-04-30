@@ -1,5 +1,7 @@
+body {
+    padding-top: 310px;
+}
 .formulario {
-    margin-top: 300px;
     color: white;
     padding-bottom: 100px;
 }

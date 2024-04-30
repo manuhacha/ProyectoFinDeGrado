@@ -35,17 +35,5 @@ const upload = multer({
   },
 });
 
-// Función para borrar una foto existente
-const deletePhoto = (filename) => {
-  const filePath = path.join(DIR, filename);
-  fs.unlink(filePath, (err) => {
-    if (err) {
-      console.error("Error al borrar el archivo:", err);
-      return;
-    }
-    console.log("Archivo borrado exitosamente:", filePath);
-  });
-};
+module.exports = upload;
 
-
-module.exports = upload,deletePhoto;

@@ -45,13 +45,19 @@ export class ProfileComponent {
   }
 
   update() {
-    //Generamos errores si la contraseña antigua no coincide con la base de datos, o si las contraseñas nuevas no coinciden
-    if (this.newpassword !== this.repeatnewpassword) {
-      this.err = 'Las contraseñas no coinciden'
-    }
+    
+    this.msg = ''
+    this.err = ''
 
-    else if (this.oldpassword !== this.dboldpassword) {
-      this.err = 'Tu contraseña antigua es incorrecta'
+    //Generamos errores si la contraseña antigua no coincide con la base de datos, o si las contraseñas nuevas no coinciden
+    if (this.oldpassword) {
+      if (this.newpassword !== this.repeatnewpassword) {
+        this.err = 'Las contraseñas no coinciden'
+      }
+  
+      else if (this.oldpassword !== this.dboldpassword) {
+        this.err = 'Tu contraseña antigua es incorrecta'
+      }
     }
 
     else {
@@ -62,8 +68,7 @@ export class ProfileComponent {
         this.msg = res
       },
       error: (err) => {
-        this.err = err
-        console.log(err)
+        this.err = err.error
       }
     })
     }
