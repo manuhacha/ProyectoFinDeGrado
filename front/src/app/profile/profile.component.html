@@ -15,8 +15,9 @@
               <form class="form pb-3" enctype="multipart/form-data" method="post">
                 <div class="form-group p-1">
                   <label for="profilepic">Your profile picture:</label>
-                  <img class="profile-photo mb-3 w-25 d-flex justify-content-center" alt="profile">              
-                  <input type="file" class="form-control" id="profilepic" name="profilepic" accept="image/*">
+                  <img *ngIf="updateUser.profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="{{this.updateUser.profilepic}}" alt="profile">
+                  <img *ngIf="!this.updateUser.profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="assets/img/profile.png" alt="profile">                            
+                  <input type="file" (change)="onFileSelected($event)" class="form-control" id="profilepic" name="profilepic" accept="image/*">
                 </div>
                 <div class="form-group p-1">
                   <label for="email">Email address</label>
@@ -40,7 +41,7 @@
                 </div>
                 <div *ngIf="msg" class="error mt-3 text-success text-center">{{this.msg}}</div>
                 <div *ngIf="err" class="error mt-3 text-danger text-center">{{this.err}}</div>
-                <button type="submit" (click)="this.update()" class="btn btn-primary mt-3 d-flex mx-auto">Submit</button>
+                <button type="submit" (click)="this.updateconfoto()" class="btn btn-primary mt-3 d-flex mx-auto">Submit</button>
                 </form>
                 <div class="spotify-btn text-center m-4">
                   <button id="authorizeButton" class="btn btn-success rounded-5 btn-spotify">Log in to Spotify</button>

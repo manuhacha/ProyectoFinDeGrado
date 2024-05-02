@@ -2,7 +2,8 @@ import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../service/auth.service';
-
+import { ProfileComponent } from '../profile/profile.component';
+ProfileComponent
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -12,7 +13,23 @@ import { AuthService } from '../service/auth.service';
 })
 export class HeaderComponent {
 
+profileimage = {
+  src: ''
+}
+
 constructor (private auth:AuthService) {}
+
+ngOnInit() {
+  this.auth.getId(localStorage.getItem('email'))
+  .subscribe({
+    next: (res) => {
+      this.profileimage.src = res.profilepic
+    },
+    error: (err) => {
+      console.log(err)
+    }
+  })
+}
 
 cambiarHeader(): boolean {
   return this.auth.isLogged();
