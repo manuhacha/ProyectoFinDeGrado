@@ -97,7 +97,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     // Actualizamos al usuario
     const updatedUser = await User.findByIdAndUpdate(id, updateddata);
 
-    res.status(200).json("User updated successfully and profilepic = " + profilepic);
+    res.status(200).json("User updated successfully");
   } catch (error) {
     console.error(error);
     res.status(500).send("Error updating user");
