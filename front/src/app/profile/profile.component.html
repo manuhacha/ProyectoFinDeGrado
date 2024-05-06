@@ -7,6 +7,8 @@
             type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Create Playlists</button>
           <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
             type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Add your Work</button>
+          <button class="nav-link" id="v-pills-cookie-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cookie"
+            type="button" role="tab" aria-controls="v-pills-cookie" aria-selected="false">Cookie Settings</button>
         </div>
         <div class="tab-content w-50" id="v-pills-tabContent">
           <div class="tab-pane bg-black border border-white rounded-3 show active" id="v-pills-home" role="tabpanel"
@@ -15,8 +17,8 @@
               <form class="form pb-3" enctype="multipart/form-data" method="post">
                 <div class="form-group p-1">
                   <label for="profilepic">Your profile picture:</label>
-                  <img *ngIf="updateUser.profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="{{this.updateUser.profilepic}}" alt="profile">
-                  <img *ngIf="!this.updateUser.profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="assets/img/profile.png" alt="profile">                            
+                  <img *ngIf="profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="{{profilepic}}" alt="profile">
+                  <img *ngIf="!profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="assets/img/profile.png" alt="profile">                            
                   <input type="file" (change)="onFileSelected($event)" class="form-control" id="profilepic" name="profilepic" accept="image/*">
                 </div>
                 <div class="form-group p-1">
@@ -29,15 +31,15 @@
                 </div>
                 <div class="form-group p-1">
                   <label for="password">Previous Password</label>
-                  <input type="password" [(ngModel)]="oldpassword" class="form-control" name="oldpassword" id="password" placeholder="Password">
+                  <input type="password" [(ngModel)]="this.updateUser.oldpassword" class="form-control" name="oldpassword" id="password" placeholder="Password">
                 </div>
                 <div class="form-group p-1">
                   <label for="password">New Password</label>
-                  <input type="password" class="form-control" [(ngModel)]="newpassword" name="newpassword" id="newpassword" placeholder="Enter New Password">
+                  <input type="password" class="form-control" [(ngModel)]="this.updateUser.password" name="newpassword" id="newpassword" placeholder="Enter New Password">
                 </div>
                 <div class="form-group p-1">
                   <label for="password">Repeat New Password</label>
-                  <input type="password" class="form-control" [(ngModel)]="repeatnewpassword" name="repeatnewpassword" id="repeatnewpassword" placeholder="Repeat New Password">
+                  <input type="password" class="form-control" [(ngModel)]="this.updateUser.repeatnewpassword" name="repeatnewpassword" id="repeatnewpassword" placeholder="Repeat New Password">
                 </div>
                 <div *ngIf="msg" class="error mt-3 text-success text-center">{{this.msg}}</div>
                 <div *ngIf="err" class="error mt-3 text-danger text-center">{{this.err}}</div>
@@ -80,10 +82,19 @@
                 </div>
                 <button class="btn btn-primary mx-2" type="submit">Submit</button>
               </form>
+              <p *ngIf="playlisterr" class="text-center text-danger mt-4">{{this.playlisterr}}</p>
               <div class="createbutton mx-auto text-center mt-5"><button class="playlists-button btn btn-primary">Create Spotify Playlist</button></div>
             </div>
           </div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+          <div class="tab-pane fade" id="v-pills-cookie" role="tabpanel" aria-labelledby="v-pills-cookie-tab">
+           <div class="container text-center bg-black p-3 border border-white rounded-3">
+            <p *ngIf="cookieaceptadas  === 'true'" class="text-success mx-auto error">Cookies are on</p>
+            <p *ngIf="cookieaceptadas === 'false'" class="text-danger mx-auto error">Cookies are off</p>
+            <button *ngIf="cookieaceptadas === 'false'" (click)="activarCookies()" class="cookiebtn btn btn-success mx-2">Turn Cookies On</button>
+            <button *ngIf="cookieaceptadas === 'true'" (click)="desactivarCookies()" class="cookiebtn btn btn-danger mx-2">Turn Cookies Off</button>
+           </div>
+          </div>
         </div>
       </div>
 </body>

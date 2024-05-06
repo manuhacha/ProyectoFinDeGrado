@@ -16,8 +16,9 @@ export class ProfileComponent {
   updateUser = {
     email: '',
     username: '',
-    password: '',
-    profilepic: ''
+    oldpassword : '',
+    password : '',
+    repeatnewpassword : ''
   }
   config = {
     headers: {
@@ -28,14 +29,12 @@ export class ProfileComponent {
   //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
   link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email'
   id = ''
-  dboldpassword = ''
-  oldpassword = ''
-  newpassword = ''
-  repeatnewpassword = ''
   err = ''
   msg = ''
+  playlisterr = ''
+  cookieaceptadas = localStorage.getItem('cookiesaceptadas')
+  profilepic = ''
   imagen?: File;
-  headers = { }
   constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService) { }
 
   ngOnInit() {
@@ -45,8 +44,7 @@ export class ProfileComponent {
         this.id = res._id
         this.updateUser.email = res.email
         this.updateUser.username = res.username
-        this.dboldpassword = res.password
-        this.updateUser.profilepic = res.profilepic
+        this.profilepic = res.profilepic
       },
       error: (err) => {
         console.log(err)
@@ -59,33 +57,24 @@ export class ProfileComponent {
     console.log(this.imagen)
   }
 
-  //Este sería el metodo update a realizar en el caso de que el usuario cambie su foto de perfil
+  //Método para actualizar usuario
   updateconfoto() {
-    console.log(this.imagen)
     this.msg = ''
     this.err = ''
-
-    if (this.oldpassword) {
-      if (this.newpassword !== this.repeatnewpassword) {
-        this.err = 'Las contraseñas no coinciden'
-      }
-      else if (this.oldpassword !== this.dboldpassword) {
-        this.err = 'Tu contraseña antigua es incorrecta'
-      }
-    }
-
-    if (this.imagen) {
-      //Comprobamos si el usuario ha querido cambiar la contraseña
-        this.updateUser.password = this.dboldpassword
+    //Si el usuario quiere cambiar su perfil entramos en este if
+    if (this.imagen !== undefined) {
         const fd = new FormData()
         fd.append('image',this.imagen,this.imagen.name)
         fd.append('email',this.updateUser.email)
         fd.append('username',this.updateUser.username)
+        fd.append('oldpassword',this.updateUser.oldpassword)
         fd.append('password',this.updateUser.password)
+        fd.append('rnewpassword',this.updateUser.repeatnewpassword)
         this.auth.updateUser(this.id,fd)
           .subscribe({
             next: (res) => {
               this.msg = res
+              this.imagen = undefined
               this.ngOnInit()
             },
             error: (err) => {
@@ -95,12 +84,11 @@ export class ProfileComponent {
     }
     //Si el usuario no quiere cambiar su foto de perfil, ejecutariamos el método de abajo
     else {
-      this.updateUser.password = this.dboldpassword
       this.auth.updateUser(this.id,this.updateUser)
     .subscribe({
       next: (res) => {
-        this.msg = res
         this.ngOnInit()
+        this.msg = res
       },
       error: (err) => {
         this.err = err.error
@@ -110,17 +98,24 @@ export class ProfileComponent {
   }
 
   getSpotifyProfile() {
-    if (localStorage.getItem('cookiesaceptadas')) {
+    if (localStorage.getItem('cookiesaceptadas') === 'true') {
       this.Spotify.getUserProfile(this.config)
       .subscribe({
         next: (res) => {
           console.log(res)
         },
         error: (err) => {
-          this.err = 'You cant use Spotify Services if cookies are not accepted, you can change this in the Profile Tab'
-          console.log(this.err)
         }
       })
     }
+    else {
+      this.playlisterr = 'You cant use Spotify Services if cookies are not accepted, you can change this in the Profile Tab'
+    }
+  }
+  activarCookies() {
+    localStorage.setItem('cookiesaceptadas','true')
+  }
+  desactivarCookies() {
+    localStorage.setItem('cookiesaceptadas','false')
   }
 }

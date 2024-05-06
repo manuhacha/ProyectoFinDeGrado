@@ -53,23 +53,27 @@ router.post("/", async (req, res) => {
 //Creamos la ruta put para actualizar los datos del usuario, que gestionaremos en el apartado de profile
 router.put("/:id", upload.single("image"), async (req, res) => {
   const { id } = req.params;
-  const updateddata = req.body;
+  const updateddata = req.body
   let profilepic = null;
-
-  if (req.file && req.file.filename) {
-    profilepic = req.protocol + "://" + req.get("host") + "/public/" + req.file.filename;
-    updateddata.profilepic = profilepic; // Añadimos la foto a los datos que vamos a actualizar
-  }
 
   try {
     const usernameexists = await User.find({ username: req.body.username });
     const emailexists = await User.find({ email: req.body.email });
+
     //Vemos si hay otro usuario con ese correo o nombre de usuario
     if ((usernameexists.length > 0 && usernameexists[0]._id.toString() !== id) ||(emailexists.length > 0 && emailexists[0]._id.toString() !== id)
     ) {
       return res.status(400).send("Email or username already exists");
     }
-
+    //Comprobamos las contraseñas
+    if (req.body.password) {
+      if (req.body.password !== req.body.repeatnewpassword) {
+        return res.status(400).send("Passwords do not match");
+      }
+      if (req.body.oldpassword !== usernameexists[0].password) {
+        return res.status(400).send("Old password is incorrect");
+      }
+    }
     // Sacamos los datos del usuario por id
     const user = await User.findById(id);
     if (!user) {
@@ -79,8 +83,11 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     // Sacamos la foto de perfil que ya tiene
     const haveprofilepic = user.profilepic;
 
-    // Vemos si el usuario tiene una foto de perfil ya asignada
-    if (haveprofilepic && haveprofilepic !== profilepic) {
+    if (req.file && req.file.filename) {
+      profilepic = req.protocol + "://" + req.get("host") + "/public/" + req.file.filename;
+      updateddata.profilepic = profilepic; // Añadimos la foto a los datos que vamos a actualizar
+      // Vemos si el usuario tiene una foto de perfil ya asignada
+      if (haveprofilepic && haveprofilepic !== profilepic) {
       // Sacamos el nombre del archivo
       const filename = haveprofilepic.split("/").pop();
       // Contruimos la ruta del archivo
@@ -92,6 +99,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
           console.error("Error deleting file:", err);
         }
       });
+    }
     }
 
     // Actualizamos al usuario
