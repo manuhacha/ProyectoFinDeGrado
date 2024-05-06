@@ -18,7 +18,9 @@ export class ProfileComponent {
     password: '',
     profilepic: ''
   }
-
+  //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
+  link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email'
+  token = this.getSpotifyToken()
   id = ''
   dboldpassword = ''
   oldpassword = ''
@@ -39,7 +41,7 @@ export class ProfileComponent {
         this.updateUser.username = res.username
         this.dboldpassword = res.password
         this.updateUser.profilepic = res.profilepic
-        console.log(res)
+        console.log(this.token)
       },
       error: (err) => {
         console.log(err)
@@ -100,5 +102,9 @@ export class ProfileComponent {
       }
     })
     }
+  }
+  getSpotifyToken() {
+  const accessToken = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
+  return accessToken
   }
 }
