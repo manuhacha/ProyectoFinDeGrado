@@ -32,6 +32,7 @@ export class ProfileComponent {
   err = ''
   msg = ''
   playlisterr = ''
+  cookiemsg = ''
   cookieaceptadas = localStorage.getItem('cookiesaceptadas')
   profilepic = ''
   imagen?: File;
@@ -114,8 +115,12 @@ export class ProfileComponent {
   }
   activarCookies() {
     localStorage.setItem('cookiesaceptadas','true')
+    this.cookiemsg = 'Cookies are turned on'
+    location.reload()
   }
   desactivarCookies() {
     localStorage.setItem('cookiesaceptadas','false')
+    this.cookiemsg = 'Cookies are turned off'
+    location.reload()
   }
 }

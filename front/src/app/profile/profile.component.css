@@ -10,11 +10,17 @@ body {
     color: white;
 }
 .playlists {
-    padding-bottom: 600px;
+    padding-bottom: 375px;
 }
 .createplaylist {
     padding: 50px;
 }
 .error {
     font-weight: bold;
+}
+.cookies {
+    padding-bottom: 550px;
+}
+.cookiescontainer {
+    height: 150px;
 }

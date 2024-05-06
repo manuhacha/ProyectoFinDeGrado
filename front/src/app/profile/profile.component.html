@@ -52,7 +52,7 @@
           </div>
           <div class="tab-pane fade playlists" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
             <div class="w-100 createplaylist bg-black border border-white rounded-3">
-              <form action="" class="form d-flex justify-content-center">
+              <form class="form d-flex justify-content-center">
                 <div class="subgenres form-group text-center">
                   <label class="mx-1" for="subgenre">Select Subgenres:</label>
                   <div class="btn-group" role="group">
@@ -87,12 +87,11 @@
             </div>
           </div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-          <div class="tab-pane fade" id="v-pills-cookie" role="tabpanel" aria-labelledby="v-pills-cookie-tab">
-           <div class="container text-center bg-black p-3 border border-white rounded-3">
-            <p *ngIf="cookieaceptadas  === 'true'" class="text-success mx-auto error">Cookies are on</p>
-            <p *ngIf="cookieaceptadas === 'false'" class="text-danger mx-auto error">Cookies are off</p>
-            <button *ngIf="cookieaceptadas === 'false'" (click)="activarCookies()" class="cookiebtn btn btn-success mx-2">Turn Cookies On</button>
-            <button *ngIf="cookieaceptadas === 'true'" (click)="desactivarCookies()" class="cookiebtn btn btn-danger mx-2">Turn Cookies Off</button>
+          <div class="tab-pane cookies fade" id="v-pills-cookie" role="tabpanel" aria-labelledby="v-pills-cookie-tab">
+           <div class="cookiescontainer text-center bg-black p-3 border border-white rounded-3">
+            <button (click)="activarCookies()" class="cookiebtn btn btn-success mx-2">Turn Cookies On</button>
+            <button (click)="desactivarCookies()" class="cookiebtn btn btn-danger mx-2">Turn Cookies Off</button>
+            <p *ngIf="cookiemsg" class="text-success text-center error mt-4">{{cookiemsg}}</p>
            </div>
           </div>
         </div>
