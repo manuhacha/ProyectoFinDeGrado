@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-
+import { SpotifyService } from '../service/spotify.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-profile',
@@ -18,9 +19,14 @@ export class ProfileComponent {
     password: '',
     profilepic: ''
   }
+  config = {
+    headers: {
+        Authorization: 'Bearer ' + this.cookie.get('token'),
+        'Content-Type': 'application/json'
+    }
+}
   //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
   link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email'
-  token = this.getSpotifyToken()
   id = ''
   dboldpassword = ''
   oldpassword = ''
@@ -29,8 +35,8 @@ export class ProfileComponent {
   err = ''
   msg = ''
   imagen?: File;
-
-  constructor(private auth: AuthService) { }
+  headers = { }
+  constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService) { }
 
   ngOnInit() {
     this.auth.getId(localStorage.getItem('email'))
@@ -41,7 +47,6 @@ export class ProfileComponent {
         this.updateUser.username = res.username
         this.dboldpassword = res.password
         this.updateUser.profilepic = res.profilepic
-        console.log(this.token)
       },
       error: (err) => {
         console.log(err)
@@ -103,8 +108,19 @@ export class ProfileComponent {
     })
     }
   }
-  getSpotifyToken() {
-  const accessToken = new URLSearchParams(window.location.hash.substring(1)).get('access_token');
-  return accessToken
+
+  getSpotifyProfile() {
+    if (localStorage.getItem('cookiesaceptadas')) {
+      this.Spotify.getUserProfile(this.config)
+      .subscribe({
+        next: (res) => {
+          console.log(res)
+        },
+        error: (err) => {
+          this.err = 'You cant use Spotify Services if cookies are not accepted, you can change this in the Profile Tab'
+          console.log(this.err)
+        }
+      })
+    }
   }
 }

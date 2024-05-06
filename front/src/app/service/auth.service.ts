@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,7 @@ export class AuthService {
 
   private getUrl = "http://localhost:3000/api/v1/user/"
 
-  private uploadPictureUrl = "http://localhost:3000/api/v1/user/upload"
-
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router, private cookie: CookieService) { }
 
   signUpUser(user:any) {
     return this.http.post<any>(this.signUpUrl,user)
@@ -37,6 +36,8 @@ export class AuthService {
   }
   logout() {
     localStorage.removeItem('token')
+    localStorage.removeItem('email')
+    this.cookie.delete('token')
     this.router.navigate(['/login'])
   }
 }
