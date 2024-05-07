@@ -22,7 +22,7 @@ export class ProfileComponent {
   }
   config = {
     headers: {
-        Authorization: 'Bearer ' + this.cookie.get('token'),
+        Authorization: 'Bearer ' + this.cookie.get('spotifytoken'),
         'Content-Type': 'application/json'
     }
 }
@@ -32,13 +32,15 @@ export class ProfileComponent {
   err = ''
   msg = ''
   playlisterr = ''
-  cookiemsg = ''
-  cookieaceptadas = localStorage.getItem('cookiesaceptadas')
+  cookiemsg = 'Cookies are turned off'
   profilepic = ''
   imagen?: File;
   constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService) { }
 
   ngOnInit() {
+    if (localStorage.getItem('cookiesaceptadas') === 'true') {
+      this.cookiemsg = 'Cookies are turned on'
+    }
     this.auth.getId(localStorage.getItem('email'))
     .subscribe({
       next: (res) => {
@@ -76,7 +78,7 @@ export class ProfileComponent {
             next: (res) => {
               this.msg = res
               this.imagen = undefined
-              this.ngOnInit()
+              location.reload()
             },
             error: (err) => {
               console.log(err)
@@ -115,12 +117,10 @@ export class ProfileComponent {
   }
   activarCookies() {
     localStorage.setItem('cookiesaceptadas','true')
-    this.cookiemsg = 'Cookies are turned on'
     location.reload()
   }
   desactivarCookies() {
     localStorage.setItem('cookiesaceptadas','false')
-    this.cookiemsg = 'Cookies are turned off'
     location.reload()
   }
 }

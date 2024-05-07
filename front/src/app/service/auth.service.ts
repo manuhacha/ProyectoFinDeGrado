@@ -37,7 +37,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token')
     localStorage.removeItem('email')
-    this.cookie.delete('token')
+    this.cookie.delete('spotifytoken')
     this.router.navigate(['/login'])
   }
 }
