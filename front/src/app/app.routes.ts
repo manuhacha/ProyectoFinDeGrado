@@ -6,6 +6,7 @@ import { BandsComponent } from './bands/bands.component';
 import { AlbumsComponent } from './albums/albums.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './guard/auth.guard';
+import { AlbumPreviewComponent } from './album-preview/album-preview.component';
 
 export const routes: Routes = [
     {
@@ -33,5 +34,9 @@ export const routes: Routes = [
         path: 'profile',
         component: ProfileComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'preview',
+        component: AlbumPreviewComponent
     }
 ];
