@@ -1,50 +1,34 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { SpotifyService } from '../service/spotify.service';
+import { AlbumsService } from '../service/albums.service';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-albums',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './albums.component.html',
   styleUrl: './albums.component.css'
 })
 export class AlbumsComponent {
 
-  album = {
-    name: '',
-    artist: '',
-    year: '',
-    picture: ''
-  }
+  albums: any[] = []
 
-  err = ''
-
-  config = {
-    headers: {
-        Authorization: 'Bearer ' + this.cookie.get('spotifytoken'),
-        'Content-Type': 'application/json'
-    }
-}
   
-  constructor(private Spotify: SpotifyService, private cookie: CookieService) { }
+  constructor(private service: AlbumsService, private cookie: CookieService) { }
 
   ngOnInit() {
-    if (this.cookie.get('spotifytoken')) {
-      this.Spotify.getSearchAlbums(this.config,"blackmetal")
+     this.service.getAlbums() 
       .subscribe({
         next: (res) => {
+          this.albums = res
           console.log(res)
         },
         error: (err) => {
           console.log(err)
-          console.log(this.config)
         }
       })
-    }
-    else {
-      console.log('No se puede')
-    }
   }
 }
   

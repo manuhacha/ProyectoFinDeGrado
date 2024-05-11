@@ -1,3 +1,16 @@
-<div class="container">
-    <h1>Albums</h1>
-</div>
+<body style="background-image: url(assets/img/background.png);">
+  <div class="row w-100 mx-auto">
+    <div class="col-md-3 mb-4" *ngFor="let album of albums">
+      <div class="card albums mx-auto border border-dark" style="width: 25rem">
+        <img [src]="album.picture" class="card-img-top" width="400px" alt="Album Cover"/>
+        <div class="card-body mx-auto text-center">
+          <h2 class="card-title">{{ album.name }}</h2>
+          <p class="card-text">{{ album.artist }}</p>
+          <p class="card-text">{{ album.year }}</p>
+          <a href="#" class="btn btn-dark">Listen on Spotify</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>

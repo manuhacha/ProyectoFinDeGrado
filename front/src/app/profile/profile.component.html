@@ -16,7 +16,7 @@
             <div class="container-fluid">
               <form class="form pb-3" enctype="multipart/form-data" method="post">
                 <div class="form-group p-1">
-                  <label for="profilepic">Your profile picture:</label>
+                  <p for="profilepic">Your profile picture:</p>
                   <img *ngIf="profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="{{profilepic}}" alt="profile">
                   <img *ngIf="!profilepic" class="profile-photo mb-3 w-25 d-flex justify-content-center" src="assets/img/profile.png" alt="profile">                            
                   <input type="file" (change)="onFileSelected($event)" class="form-control" id="profilepic" name="profilepic" accept="image/*">
