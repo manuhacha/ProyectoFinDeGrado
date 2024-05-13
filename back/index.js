@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const user = require('../back/routes/user');
 const auth = require('../back/routes/auth');
 const album = require('../back/routes/album');
+const artist = require('../back/routes/artist')
 const cors = require('cors');
 
 const app = express();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use('/api/v1/user/', user);
 app.use('/api/v1/auth/', auth);
 app.use('/api/v1/album/', album);
+app.use('/api/v1/artist/',artist)
 app.use('/public',express.static('public'));
 
 //Ponemos el puerto que queremos

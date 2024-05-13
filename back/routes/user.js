@@ -102,9 +102,14 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     }
     }
 
-    // Actualizamos al usuario
-    const updatedUser = await User.findByIdAndUpdate(id, updateddata);
+    // Actualizamos al usuario y enviamos todos los datos, o sin las contraseñas si no ha querido cambiarla
+    if (req.body.password) {
+      const updatedUser = await User.findByIdAndUpdate(id, updateddata);
+    }
+    else {
+      const updatedUser = await User.findByIdAndUpdate(id, {profilepic: updateddata.profilepic,email: updateddata.email,username: updateddata.username});
 
+    }
     res.status(200).json("User updated successfully");
   } catch (error) {
     console.error(error);
