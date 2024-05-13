@@ -14,4 +14,7 @@ export class AlbumsService {
   getAlbums() {
     return this.http.get<any>(this.getAlbumsUrl)
   }
+  createAlbums(album:any) {
+    return this.http.post<any>(this.getAlbumsUrl,album)
+  }
 }
