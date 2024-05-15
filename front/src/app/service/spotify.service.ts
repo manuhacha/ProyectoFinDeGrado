@@ -27,4 +27,7 @@ export class SpotifyService {
   getSearchAlbums(genre:string) {
     return this.http.get<any>(this.searchUrl + "genre=" + genre + '&type=album',this.config)
   }
+  getSearchArtists(genre:string) {
+    return this.http.get<any>(this.searchUrl + "genre=" + genre + '&limit=50' + '&type=artist',this.config)
+  }
 }

@@ -1,5 +1,5 @@
-.albums {
-    margin-top: 200px;
+body {
+    padding-top: 150px;
 }
 h2 {
     font-family: 'UnifrakturCook', cursive;
@@ -8,4 +8,7 @@ h2 {
 p {
     font-family: 'UnifrakturCook', cursive;
     font-size: 30px;
+}
+.card {
+    margin-bottom: 100px;
 }

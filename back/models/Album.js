@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const albumSchema = new mongoose.Schema({
     name: String,
     artist: String,
-    year: String,
-    picture: String
+    date: String,
+    picture: String,
+    link: String
 })
 
 const Album = mongoose.model('albums',albumSchema)

@@ -22,7 +22,8 @@ router.post("/", async (req, res) => {
     let artist = new Artist({
       name: req.body.name,
       genre: req.body.genre,  
-      picture: req.body.picture
+      picture: req.body.picture,
+      link: req.body.link
     });
   
       const result = await artist.save();

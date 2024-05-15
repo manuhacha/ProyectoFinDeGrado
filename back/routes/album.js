@@ -22,8 +22,9 @@ router.post("/", async (req, res) => {
     let album = new Album({
       name: req.body.name,
       artist: req.body.artist,
-      year: req.body.year,
-      picture: req.body.picture
+      date: req.body.date,
+      picture: req.body.picture,
+      link: req.body.link
     });
   
       const result = await album.save();

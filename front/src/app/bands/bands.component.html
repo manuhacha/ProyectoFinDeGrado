@@ -1,4 +1,7 @@
 <body style="background-image: url(assets/img/background.png);">
+  <!-- <div class="createalbums text-center">
+    <button (click)="addBands()" class="btn btn-primary my-4 p-2">Add Bands</button>
+  </div> -->
     <div class="row w-100 mx-auto">
       <div class="col-md-3" *ngFor="let band of bands">
         <div class="card bands mx-auto border border-dark" style="width: 25rem">
@@ -6,7 +9,7 @@
           <div class="card-body mx-auto text-center">
             <h2 class="card-title">{{ band.name }}</h2>
             <p class="card-text">{{ band.genre }}</p>
-            <a href="#" class="btn btn-dark">Listen on Spotify</a>
+            <a [href]="band.link" class="btn btn-dark">Listen on Spotify</a>
           </div>
         </div>
       </div>

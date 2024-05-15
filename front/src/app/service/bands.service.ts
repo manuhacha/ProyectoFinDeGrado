@@ -14,4 +14,7 @@ export class BandsService {
   getArtists() {
     return this.http.get<any>(this.getBandsUrl)
   }
+  createArtist(band:any) {
+    return this.http.post<any>(this.getBandsUrl,band)
+  }
 }

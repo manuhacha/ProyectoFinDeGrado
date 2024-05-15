@@ -1,4 +1,7 @@
 <body style="background-image: url(assets/img/background.png);">
+  <div class="createalbums text-center">
+    <button (click)="addAlbums()" class="btn btn-primary my-4 p-2">Add Albums</button>
+  </div>
   <div class="row w-100 mx-auto">
     <div class="col-md-3" *ngFor="let album of albums">
       <div class="card albums mx-auto border border-dark" style="width: 25rem">
@@ -6,8 +9,8 @@
         <div class="card-body mx-auto text-center">
           <h2 class="card-title">{{ album.name }}</h2>
           <p class="card-text">{{ album.artist }}</p>
-          <p class="card-text">{{ album.year }}</p>
-          <a href="#" class="btn btn-dark">Listen on Spotify</a>
+          <p class="card-text">{{ album.date }}</p>
+          <a [href]="album.link" class="btn btn-dark">Listen on Spotify</a>
         </div>
       </div>
     </div>

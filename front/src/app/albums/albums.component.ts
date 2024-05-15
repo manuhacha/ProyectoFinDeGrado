@@ -14,17 +14,22 @@ import { NgFor } from '@angular/common';
 export class AlbumsComponent {
 
   albums: any[] = []
+  album = {
+    name: '',
+    artist: '',
+    date: '',
+    picture: '',
+    link: ''
+  }
 
   
   constructor(private service: AlbumsService, private spotify: SpotifyService) { }
 
   ngOnInit() {
-    this.añadirAlbumes()
      this.service.getAlbums() 
       .subscribe({
         next: (res) => {
           this.albums = res
-          console.log(res)
         },
         error: (err) => {
           console.log(err)
@@ -32,16 +37,35 @@ export class AlbumsComponent {
       })
   }
   //Este método sólo se ejecuta si no hay álbumes, básicamente añade 100 álbumes de la api de spotify a la bbdd, basándose en un género
-  añadirAlbumes() {
-    this.spotify.getSearchAlbums('blackmetal')
-      .subscribe({
-        next: (res) => {
-          console.log(res)
-        },
-        error: (err) => {
-          console.log(err)
+  addAlbums() {
+    this.spotify.getSearchAlbums('blackmetal').subscribe({
+      next: (res) => {
+        console.log(res)
+        for (let i = 0; i < res.albums.items.length; i++) {
+          const album = {
+            name: res.albums.items[i].name,
+            artist: res.albums.items[i].artists[0].name,
+            date: res.albums.items[i].release_date,
+            picture: res.albums.items[i].images[0].url,
+            link: res.albums.items[i].external_urls.spotify
+          };
+  
+          this.service.createAlbum(album).subscribe({
+            next: (res) => {
+              console.log('Album created succesfully');
+            },
+            error: (err) => {
+              console.log('Error creating album');
+            }
+          });
         }
-      })
+        location.reload()
+      },
+      error: (err) => {
+        console.log('Error getting spotify albums');
+      }
+    });
   }
+  
 }
   
