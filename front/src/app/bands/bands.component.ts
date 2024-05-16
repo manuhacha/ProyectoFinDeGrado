@@ -46,7 +46,7 @@ export class BandsComponent {
         for (let i = 0; i < res.artists.items.length; i++) {
           // Verificar que genres sea un array antes de usarlo
           if (Array.isArray(res.artists.items[i].genres)) {
-            const genresArray: string[] = res.artists.items[i].genres.slice(0, 3);
+            const genresArray: string[] = res.artists.items[i].genres.slice(0, 3)
             const artist = {
               name: res.artists.items[i].name,
               genre: genresArray.join(', '),
