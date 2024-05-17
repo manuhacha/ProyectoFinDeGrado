@@ -22,7 +22,7 @@ export class ProfileComponent {
   }
 
   //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
-  link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:64817/&scope=user-read-private%20user-read-email'
+  link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email'
   id = ''
   err = ''
   msg = ''
