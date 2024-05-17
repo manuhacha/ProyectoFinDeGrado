@@ -1,0 +1,36 @@
+body {
+    padding-top: 310px;
+}
+.formulario {
+    color: white;
+    padding-bottom: 100px;
+}
+.img {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.showAlert, .showError, .exists {
+    margin-top: 20px;
+}
+.showAlert p, .showError p, .exists p {
+    padding-top: 13.5px;
+}
+.home-img {
+    width: 50px;
+}
+.nav-link {
+    color: white;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+input {
+    width: 250px;
+}
+.error {
+    font-weight: bold;
+}
