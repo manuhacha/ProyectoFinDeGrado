@@ -1,6 +1,17 @@
 <body style="background-image: url(assets/img/background.png);">
-  <div class="createalbums text-center">
-    <button (click)="addBands()" class="btn btn-primary my-4 p-2">Add Bands</button>
+  <div *ngIf="this.adminemail" class="createalbums text-center">
+    <button (click)="addArtist()" class="btn btn-primary my-4 p-2">Add Band</button>
+  </div>
+  <div *ngIf="this.togglealbumcreation" class="formulario container-fluid d-flex justify-content-center">
+    <form class="form border border-white mb-5 text-white p-5 rounded-3 bg-black">
+      <div class="mb-3">
+        <label for="email" class="form-label">Spotify Artist Id</label>
+        <input type="text" [(ngModel)]="artistid" class="form-control" name="albumid" aria-describedby="emailHelp">        
+      </div>
+      <div class="mt-4 text-center">
+        <button type="submit" (click)="createArtist()" class="btn btn-primary">Add Band To Database</button>
+      </div>
+    </form>
   </div>
     <div class="row w-100 mx-auto">
       <div class="col-md-3" *ngFor="let band of bands">

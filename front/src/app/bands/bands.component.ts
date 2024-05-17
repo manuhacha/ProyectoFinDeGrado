@@ -1,18 +1,23 @@
 import { Component } from '@angular/core';
 import { BandsService } from '../service/bands.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { SpotifyService } from '../service/spotify.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-bands',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,FormsModule,ReactiveFormsModule, NgIf],
   templateUrl: './bands.component.html',
   styleUrl: './bands.component.css'
 })
 export class BandsComponent {
 
-  band = {
+  adminemail = ''
+  artistid = ''
+  togglealbumcreation = false
+  newband = {
     name: '',
     genre: '',
     picture: '',
@@ -24,9 +29,20 @@ export class BandsComponent {
   bands: any[] = []
 
   
-  constructor(private service: BandsService, private spotify: SpotifyService) { }
+  constructor(private service: BandsService, private spotify: SpotifyService, private auth: AuthService) { }
 
   ngOnInit() {
+    this.auth.getUserbyToken(localStorage.getItem('token')!)
+      .subscribe({
+        next: (res) => {
+          if (res.email === 'bymanuxxyt@hotmail.com') {
+            this.adminemail = res.email
+          }
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
      this.service.getArtists()
       .subscribe({
         next: (res) => {
@@ -71,5 +87,31 @@ export class BandsComponent {
       }
     });
   }
-  
+  createArtist() {
+    console.log(this.artistid)
+    this.spotify.getArtistbyId(this.artistid)
+      .subscribe({
+        next: (res) => {
+          console.log(res)
+          this.newband.link = res.external_urls.spotify
+          this.newband.picture = res.images[0].url
+          this.newband.name = res.name
+          this.newband.genre = res.genres.slice(0, 3).join(', ')
+          this.service.createArtist(this.newband)
+            .subscribe({
+              next: (res) => {
+                this.togglealbumcreation = false
+                location.reload()  
+              }
+            })
+        },
+        error: (err) => {
+          console.log(err)
+          this.togglealbumcreation = false
+        }
+      })
+  }
+  addArtist() {
+    this.togglealbumcreation = true
+  }
 }
