@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "664724cb5d513a94cf2fc6e7"
+  },
+  "name": "Transilvanian Hunger",
+  "artist": "Darkthrone",
+  "date": "1994-02-17",
+  "picture": "https://i.scdn.co/image/ab67616d0000b27314162dce63b77ff4d37a25d3",
+  "spotifyid": "4a4g7PAi7KRsCQykBFqE5E",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664728c05d513a94cf2fc724"
+  },
+  "name": "De Mysteriis Dom Sathanas",
+  "artist": "Mayhem",
+  "date": "1994",
+  "picture": "https://i.scdn.co/image/ab67616d0000b2732b58dcaa52f824711a95ab1b",
+  "spotifyid": "7mHVfSXtdzvPk7TkdhoekE",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664728cf5d513a94cf2fc729"
+  },
+  "name": "Filosofem",
+  "artist": "Burzum",
+  "date": "1996",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273946cb01ce19e132b950409e3",
+  "spotifyid": "2XQwZUu0MM9ECgwHbcc8qR",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664728fd5d513a94cf2fc72e"
+  },
+  "name": "Blood Fire Death",
+  "artist": "Bathory",
+  "date": "1988-01-01",
+  "picture": "https://i.scdn.co/image/ab67616d0000b27335f5af2b63ac3d5dee27972b",
+  "spotifyid": "2QVt9UZEloRJgYqE70ACPs",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664729115d513a94cf2fc733"
+  },
+  "name": "In The Nightside Eclipse",
+  "artist": "Emperor",
+  "date": "1994-02-21",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273c4dd961a4b5e21547ad1c984",
+  "spotifyid": "0va7zHEUQixlEhLAFz2r63",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664729255d513a94cf2fc738"
+  },
+  "name": "Storm Of The Light's Bane",
+  "artist": "Dissection",
+  "date": "2006-06-24",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273c4f52fd0a4d10f8a84409ca5",
+  "spotifyid": "7qaXAWJAGzze8H0AU5PyNt",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6647310f5d513a94cf2fc821"
+  },
+  "name": "Black Metal",
+  "artist": "Venom",
+  "date": "1982-11-01",
+  "picture": "https://i.scdn.co/image/ab67616d0000b27361383fe42756b74fb81ed769",
+  "spotifyid": "1e6Osda6t8UDFYQ29sFVlV",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664731305d513a94cf2fc826"
+  },
+  "name": "Bergtatt",
+  "artist": "Ulver",
+  "date": "1994",
+  "picture": "https://i.scdn.co/image/ab67616d0000b27307689efddb1e40e440d76007",
+  "spotifyid": "5OEz7YwAQyYvaSl1pmkPCI",
+  "__v": 0
+}]
