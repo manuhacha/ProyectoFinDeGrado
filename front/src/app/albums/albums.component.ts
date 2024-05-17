@@ -1,31 +1,48 @@
 import { Component } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { SpotifyService } from '../service/spotify.service';
 import { AlbumsService } from '../service/albums.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
+import { AuthService } from '../service/auth.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PreviewService } from '../service/preview.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-albums',
   standalone: true,
-  imports: [NgFor],
+  imports: [NgFor,NgIf,FormsModule,ReactiveFormsModule],
   templateUrl: './albums.component.html',
   styleUrl: './albums.component.css'
 })
 export class AlbumsComponent {
 
   albums: any[] = []
-  album = {
+  adminemail = ''
+  togglealbumcreation = false
+  albumid = ''
+  newalbum = {
     name: '',
     artist: '',
     date: '',
     picture: '',
-    link: ''
+    spotifyid: ''
   }
-
   
-  constructor(private service: AlbumsService, private spotify: SpotifyService) { }
+  constructor(private service: AlbumsService, private spotify: SpotifyService,private auth: AuthService, private pservice: PreviewService, private router: Router) { }
 
   ngOnInit() {
+    //Nos suscribimos a el metodo para poder obtener el perfil, y comprobar si es mi correo, haciendo que mi cuenta sea una especie de usuario admin
+    this.auth.getUserbyToken(localStorage.getItem('token')!)
+      .subscribe({
+        next: (res) => {
+          if (res.email === 'bymanuxxyt@hotmail.com') {
+            this.adminemail = res.email
+          }
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
      this.service.getAlbums() 
       .subscribe({
         next: (res) => {
@@ -38,33 +55,36 @@ export class AlbumsComponent {
   }
   //Este método sólo se ejecuta si no hay álbumes, básicamente añade 100 álbumes de la api de spotify a la bbdd, basándose en un género
   addAlbums() {
-    this.spotify.getSearchAlbums('blackmetal').subscribe({
-      next: (res) => {
-        console.log(res)
-        for (let i = 0; i < res.albums.items.length; i++) {
-          const album = {
-            name: res.albums.items[i].name,
-            artist: res.albums.items[i].artists[0].name,
-            date: res.albums.items[i].release_date,
-            picture: res.albums.items[i].images[0].url,
-            link: res.albums.items[i].external_urls.spotify
-          };
-  
-          this.service.createAlbum(album).subscribe({
-            next: (res) => {
-              console.log('Album created succesfully');
-            },
-            error: (err) => {
-              console.log('Error creating album');
-            }
-          });
+    this.togglealbumcreation = true
+  }
+  createAlbum() {
+    console.log(this.albumid)
+    this.spotify.getAlbumbyId(this.albumid)
+      .subscribe({
+        next: (res) => {
+          this.newalbum.spotifyid = this.albumid
+          this.newalbum.name = res.name
+          this.newalbum.artist = res.artists[0].name
+          this.newalbum.date = res.release_date
+          this.newalbum.picture = res.images[0].url
+          this.service.createAlbum(this.newalbum)
+            .subscribe({
+              next: (res) => {
+                this.togglealbumcreation = false
+                location.reload()  
+              }
+            })
+        },
+        error: (err) => {
+          console.log(err)
+          this.togglealbumcreation = false
         }
-        location.reload()
-      },
-      error: (err) => {
-        console.log('Error getting spotify albums');
-      }
-    });
+      })
+  }
+  //Mandamos el id del album para poder construir la url del embed al dirigir a /preview
+  sendAlbumId(id:any) {
+    this.pservice.sendAlbumId(id)
+    this.router.navigate(['preview'])
   }
   
 }

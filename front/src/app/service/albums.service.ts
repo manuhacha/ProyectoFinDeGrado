@@ -18,7 +18,4 @@ export class AlbumsService {
   createAlbum(album:any) {
     return this.http.post<any>(this.getAlbumsUrl,album)
   }
-  isablackmetalband() {
-    
-  }
 }

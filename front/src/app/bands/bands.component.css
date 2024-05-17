@@ -1,13 +1,13 @@
 body {
-    padding-top: 200px;
+    padding-top: 100px;
 }
 h2 {
-    font-family: 'UnifrakturCook', cursive;
-    font-size: 40px;
+  font-family: 'UnifrakturCook', cursive;
+  font-size: 33px;
 }
 p {
-    font-family: 'UnifrakturCook', cursive;
-    font-size: 30px;
+  font-family: 'UnifrakturCook', cursive;
+  font-size: 30px;
 }
 .card {
     display: flex; 

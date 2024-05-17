@@ -1,6 +1,17 @@
 <body style="background-image: url(assets/img/background.png);">
-  <div class="createalbums text-center">
+  <div *ngIf="this.adminemail" class="createalbums text-center">
     <button (click)="addAlbums()" class="btn btn-primary my-4 p-2">Add Albums</button>
+  </div>
+  <div *ngIf="this.togglealbumcreation" class="formulario container-fluid d-flex justify-content-center">
+    <form class="form border border-white mb-5 text-white p-5 rounded-3 bg-black">
+      <div class="mb-3">
+        <label for="email" class="form-label">Spotify Album Id</label>
+        <input type="text" [(ngModel)]="albumid" class="form-control" name="albumid" aria-describedby="emailHelp">        
+      </div>
+      <div class="mt-4 text-center">
+        <button type="submit" (click)="createAlbum()" class="btn btn-primary">Add Album To Database</button>
+      </div>
+    </form>
   </div>
   <div class="row w-100 mx-auto">
     <div class="col-md-3" *ngFor="let album of albums">
@@ -10,7 +21,7 @@
           <h2 class="card-title">{{ album.name }}</h2>
           <p class="card-text">{{ album.artist }}</p>
           <p class="card-text">{{ album.date }}</p>
-          <a [href]="album.link" class="btn btn-dark">Listen on Spotify</a>
+          <a (click)="this.sendAlbumId(album.spotifyid)" class="btn btn-dark mx-auto">Listen on Spotify</a>
         </div>
       </div>
     </div>

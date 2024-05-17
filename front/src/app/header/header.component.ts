@@ -20,7 +20,7 @@ profileimage = {
 constructor (private auth:AuthService) {}
 
 ngOnInit() {
-  this.auth.getId(localStorage.getItem('email'))
+  this.auth.getUserbyToken(localStorage.getItem('token')!)
   .subscribe({
     next: (res) => {
       this.profileimage.src = res.profilepic

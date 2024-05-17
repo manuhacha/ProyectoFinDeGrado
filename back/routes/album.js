@@ -24,11 +24,16 @@ router.post("/", async (req, res) => {
       artist: req.body.artist,
       date: req.body.date,
       picture: req.body.picture,
-      link: req.body.link
+      spotifyid: req.body.spotifyid
     });
   
-      const result = await album.save();
-      res.status(200).send('Album saved succesfully');
+      try {
+        const result = await album.save();
+        res.status(200).json("Album saved succesfully")
+      }
+      catch (error) {
+        res.status(400).send("Error creating album")
+      }
     }); 
     
     

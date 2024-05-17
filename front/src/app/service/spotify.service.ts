@@ -18,14 +18,15 @@ export class SpotifyService {
 
   private searchUrl = "https://api.spotify.com/v1/search?q="
 
+  private getAlbum = 'https://api.spotify.com/v1/albums'
 
   constructor(private http: HttpClient, private cookie: CookieService) { }
 
   getUserProfile() {
     return this.http.get<any>(this.getUserUrl,this.config)
   }
-  getSearchAlbums(genre:string) {
-    return this.http.get<any>(this.searchUrl + "genre=" + genre + '&type=album',this.config)
+  getAlbumbyId(id: string) {
+    return this.http.get<any>(this.getAlbum + '/' + id,this.config)
   }
   getSearchArtists(genre:string) {
     return this.http.get<any>(this.searchUrl + "genre=" + genre + '&limit=50' + '&type=artist',this.config)

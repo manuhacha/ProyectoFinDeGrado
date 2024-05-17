@@ -1,14 +1,38 @@
 body {
-    padding-top: 150px;
+    padding-top: 100px;
 }
 h2 {
     font-family: 'UnifrakturCook', cursive;
-    font-size: 40px;
+    font-size: 33px;
 }
 p {
     font-family: 'UnifrakturCook', cursive;
     font-size: 30px;
 }
 .card {
+    display: flex; 
+    flex-direction: column; 
+    align-items: stretch;
     margin-bottom: 100px;
+  }
+.card-img-top {
+    height: 300px;  
+    object-fit: cover; 
 }
+  
+.card-body {
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    min-height: 225px;
+    
+}
+p.card-text {
+    margin: 0; 
+}  
+.btn.btn-dark {
+    margin-top: auto; 
+    max-width: 200px;
+}
+

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/User');
-
+const auth = require('../middleware/auth')
 router.post('/',async(req,res)=>{
     const user = await User.findOne({email: req.body.email});
     
@@ -16,4 +16,14 @@ router.post('/',async(req,res)=>{
         res.status(400).send('User does not exist')
     }
 })
+//Metodo get para obtener usuario a partir del token, pasando por nuestro middleware auth
+router.get('/', auth, async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select('-password');
+        if (!user) return res.status(404).send('User not found');
+        res.send(user);
+    } catch (error) {
+        res.status(500).send('Internal Server Error');
+    }
+});
 module.exports = router;

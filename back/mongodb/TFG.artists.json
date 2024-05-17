@@ -1,0 +1,480 @@
+[{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11d92"
+  },
+  "name": "Mgła",
+  "genre": "atmospheric black metal, black metal, polish black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eba02bb47cde9a07a73d905cb2",
+  "link": "https://open.spotify.com/artist/2hbkBlGBgvJkC3tpUn9w4C",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11d94"
+  },
+  "name": "Mayhem",
+  "genre": "black metal, metal, norwegian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebe60e1c595b887e90c6065620",
+  "link": "https://open.spotify.com/artist/0dR10i73opHXuRuLbgxltM",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11d96"
+  },
+  "name": "Gorgoroth",
+  "genre": "black metal, metal, norwegian black metal",
+  "picture": "https://i.scdn.co/image/0b92dedbdbe552ac79e0b551c753ce7deb704a71",
+  "link": "https://open.spotify.com/artist/1Dt7cfRzxM8qPVa82jX9y5",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11d98"
+  },
+  "name": "Nargaroth",
+  "genre": "autonomous black metal, black metal, german black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb0f0724de105dfc7e46991202",
+  "link": "https://open.spotify.com/artist/0aIcU4OHpKl7lpcRQp32Eo",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11d9a"
+  },
+  "name": "Immortal",
+  "genre": "black metal, metal, norwegian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb4372542674b2feb49154d21d",
+  "link": "https://open.spotify.com/artist/2mVTkiwfm4ic6DnHpmFq8K",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11d9c"
+  },
+  "name": "Nocturnal Depression",
+  "genre": "black metal, depressive black metal, french black metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273019f0dc845f69532a39fcbfd",
+  "link": "https://open.spotify.com/artist/7wWVpKpMtvSX9mQapjtKAD",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11d9e"
+  },
+  "name": "Hulder",
+  "genre": "black metal, medieval black metal, raw black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb31ab7cb1ed745c77a98283a8",
+  "link": "https://open.spotify.com/artist/65vrcJ67suxLePeEhUtLLo",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11da0"
+  },
+  "name": "Mutiilation",
+  "genre": "black metal, cosmic black metal, depressive black metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273070b62ac36f613224d215c64",
+  "link": "https://open.spotify.com/artist/4lbKjEvAKni4q1GLsDcvZI",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11da2"
+  },
+  "name": "Blut Aus Nord",
+  "genre": "atmospheric black metal, avant-garde black metal, black metal",
+  "picture": "https://i.scdn.co/image/029b877f7f45df775b0029c3d87de1fe3b01c169",
+  "link": "https://open.spotify.com/artist/0c0xIXQhCbmtvzM93liaSf",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11da4"
+  },
+  "name": "None",
+  "genre": "atmospheric black metal, cascadian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb7b3d2df815050bc169c05e24",
+  "link": "https://open.spotify.com/artist/2ZO5sFPyILDQkFdS4HJPFS",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11da8"
+  },
+  "name": "Beherit",
+  "genre": "black metal, finnish black metal, lapland metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273289b4aa7ef7fe97dbf6ffc6f",
+  "link": "https://open.spotify.com/artist/3EHztVB0kFpqp0N8MlmD1X",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11daa"
+  },
+  "name": "Absu",
+  "genre": "black metal, black thrash, occult black metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273cc7739a88ea3aa86674f1bde",
+  "link": "https://open.spotify.com/artist/3eVkhnD2UKVjX5uiUsqfXP",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11da6"
+  },
+  "name": "Hate",
+  "genre": "black metal, brutal death metal, death metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebb310d80a0437ea2d8f18f585",
+  "link": "https://open.spotify.com/artist/13XggX75z0Hk0VNvOuTJoB",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dac"
+  },
+  "name": "Aara",
+  "genre": "atmospheric black metal, swiss black metal, voidgaze",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb651bad3143db5f491ca0d4f9",
+  "link": "https://open.spotify.com/artist/3UpDjZ41s0rOQsDKSECKmt",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dae"
+  },
+  "name": "Batushka",
+  "genre": "black metal, polish black metal, polish metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebed77e8164cf6633ab8715db4",
+  "link": "https://open.spotify.com/artist/15LsRgSmN0t8VLcsUFYW5J",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11db0"
+  },
+  "name": "Taake",
+  "genre": "black metal, norwegian black metal, norwegian metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb3a84807445d3760179efae2c",
+  "link": "https://open.spotify.com/artist/2CofVEvqc6hhyKwYsLiuN9",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11db2"
+  },
+  "name": "Heretoir",
+  "genre": "atmospheric black metal, blackgaze, emotional black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb0c495c98020e0b5210afc611",
+  "link": "https://open.spotify.com/artist/4W1aTc1mS8IudqNaxfGKar",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11db4"
+  },
+  "name": "1914",
+  "genre": "black metal, death doom, ukrainian metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273cb9c9c2a8071c0b4312f843b",
+  "link": "https://open.spotify.com/artist/0IpKWttPlwhd7Cevxsh1Bz",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11db6"
+  },
+  "name": "1349",
+  "genre": "black metal, death metal, norwegian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebc4a8b2fd7dc400144b65d972",
+  "link": "https://open.spotify.com/artist/150xbiJGnTy1tSBZ9EFKnT",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11db8"
+  },
+  "name": "I",
+  "genre": "black 'n' roll, black metal, norwegian black metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273f12df390bbeed0c34fa73af8",
+  "link": "https://open.spotify.com/artist/5E9XOlEicDpLGlRZCRarR7",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dba"
+  },
+  "name": "Asagraum",
+  "genre": "black metal, dutch black metal, symphonic black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebe00626f32d4dc74a232909b6",
+  "link": "https://open.spotify.com/artist/0vYB7kRlczfzsOnK49N7D2",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dbc"
+  },
+  "name": "Samael",
+  "genre": "black metal, industrial black metal, metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb63b0c78e0f24409629bf1031",
+  "link": "https://open.spotify.com/artist/1WXagRGw8AveVrRxDfUjli",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dbe"
+  },
+  "name": "Selbst",
+  "genre": "atmospheric black metal, venezuelan metal, voidgaze",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb90a765eacd5001ef5caac8e7",
+  "link": "https://open.spotify.com/artist/1EiQbUfIU3UhBZR5sQRTHN",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dc0"
+  },
+  "name": "Behexen",
+  "genre": "autonomous black metal, black metal, finnish black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebc0134d95cd0464b0c28940bb",
+  "link": "https://open.spotify.com/artist/2A56suoU3YFYLIp7wHde6c",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dc2"
+  },
+  "name": "Belphegor",
+  "genre": "austrian black metal, austrian metal, black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb2ab1a7b9329f83536f952214",
+  "link": "https://open.spotify.com/artist/1uPIYn2IU0IuPWSZ58kzyM",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dc4"
+  },
+  "name": "Grima",
+  "genre": "atmospheric black metal, russian black metal, voidgaze",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebe10b0384c676ee53a99a8014",
+  "link": "https://open.spotify.com/artist/7KSPZyeCKkfkhMkX8rYIhD",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dc6"
+  },
+  "name": "Numen",
+  "genre": "euskal metal, spanish black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eba8ff4f7fa0f9ba4c0c3b46ca",
+  "link": "https://open.spotify.com/artist/35isU5C0iVpDhM4pw3vi8g",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dc8"
+  },
+  "name": "Perennial Isolation",
+  "genre": "metal catala, spanish black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb59bbe29187b50923329ae72a",
+  "link": "https://open.spotify.com/artist/0EoycfTl7mz0TuUugjpxeH",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dca"
+  },
+  "name": "Uada",
+  "genre": "atmospheric black metal, black metal, cascadian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebf1b63b2621fc4160161584d2",
+  "link": "https://open.spotify.com/artist/30R8X3xhfDbxAcfxSZ0UaQ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dcc"
+  },
+  "name": "Noctem",
+  "genre": "charred death, spanish black metal, spanish metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebfaaf0272d2b254e5cc0e2f63",
+  "link": "https://open.spotify.com/artist/5vgKbVvFRXWortgyxWN8YW",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dce"
+  },
+  "name": "VÉHÉMENCE",
+  "genre": "atmospheric black metal, epic black metal, medieval black metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273c8d49ccf42bf7b5a55f244cc",
+  "link": "https://open.spotify.com/artist/54Ku01OPl9ax1rVLhQjkgJ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dd0"
+  },
+  "name": "Khold",
+  "genre": "black 'n' roll, black metal, norwegian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb102b6341a2748a9848e3fa6e",
+  "link": "https://open.spotify.com/artist/1jWLZOjuzRSkIxmrqAx4Vt",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dd2"
+  },
+  "name": "Walg",
+  "genre": "dutch black metal, melodic black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebe22e3a23cc2407cbe5c78fc9",
+  "link": "https://open.spotify.com/artist/6sSvlAu7Q8NDcNkn3C0TvZ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dd4"
+  },
+  "name": "Numenorean",
+  "genre": "atmospheric black metal, canadian black metal, post-metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb76d181360b6c3db10be4ed9c",
+  "link": "https://open.spotify.com/artist/2qBGuYUZX53HN4Vk7Msjlc",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dd6"
+  },
+  "name": "Horn",
+  "genre": "autonomous black metal, german black metal, pagan black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebcf4afddda8cde2963f772ad3",
+  "link": "https://open.spotify.com/artist/5MmWBBxtGph66XDnjymwjW",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dd8"
+  },
+  "name": "Ultar",
+  "genre": "atmospheric black metal, lovecraftian metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebbd3a0e1ba02dae0bf2f231ea",
+  "link": "https://open.spotify.com/artist/6qBmMTIQANnluSglXkcRV0",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dda"
+  },
+  "name": "Balmog",
+  "genre": "cryptic black metal, metal galego, spanish black metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273c1664b17c34bb5a0d38091f2",
+  "link": "https://open.spotify.com/artist/2Q5TexPC3916SWqfGneu5E",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11ddc"
+  },
+  "name": "Naglfar",
+  "genre": "black metal, melodic black metal, swedish black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebf09d120b6dc89fffbcb82e04",
+  "link": "https://open.spotify.com/artist/1WV0pMUfO5UZ3MXfZrTohr",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dde"
+  },
+  "name": "Enslaved",
+  "genre": "black metal, death metal, metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebca34c9ba25a9851946cabbc2",
+  "link": "https://open.spotify.com/artist/2HmtB6wVRRi3z0JwZHtkiD",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11de0"
+  },
+  "name": "Iván Ferrús",
+  "genre": "atmospheric black metal, cosmic black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb4f6fb95b08f9b535a9f3e96d",
+  "link": "https://open.spotify.com/artist/4DtXLPkKXCormBHlZzDm8c",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11de2"
+  },
+  "name": "Northland",
+  "genre": "folk metal, metal catala, spanish folk metal",
+  "picture": "https://i.scdn.co/image/ab67616d0000b27365c752ced373e8ebf8df549c",
+  "link": "https://open.spotify.com/artist/01oX6jHYsrwwoZE33DTTaY",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11de4"
+  },
+  "name": "Warg",
+  "genre": "",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb7a782fc1442ba871a7f3eb08",
+  "link": "https://open.spotify.com/artist/5tza5SA5V9A6oB7QZbswuS",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11de6"
+  },
+  "name": "Insaniam",
+  "genre": "spanish black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebbe5e79fdc4731771ac63003e",
+  "link": "https://open.spotify.com/artist/6bRa9397Xkg0NDcGkJxEmZ",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11de8"
+  },
+  "name": "Agriculture",
+  "genre": "emotional black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb7c6e5a1999374e268896cef4",
+  "link": "https://open.spotify.com/artist/23Skjj6LyKEVkNIUFrLBUY",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dea"
+  },
+  "name": "Thy Catafalque",
+  "genre": "avant-garde metal, cosmic black metal, hungarian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5ebe3ee0656c16744d260b1f7c0",
+  "link": "https://open.spotify.com/artist/4sgTqbA7htxYkRRJBPZIom",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dec"
+  },
+  "name": "Nordjevel",
+  "genre": "black metal, norwegian black metal",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb97123fef1739ebb9243625be",
+  "link": "https://open.spotify.com/artist/3Pfim1uupYVYG87GDtdw8r",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11dee"
+  },
+  "name": "VLTIMAS",
+  "genre": "black death",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb0f9f845330e0f77ac522d68f",
+  "link": "https://open.spotify.com/artist/0kZ64zYv2xtKdhbOzTPdWA",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6644c3165f9f2e4403b11df0"
+  },
+  "name": "Ancst",
+  "genre": "blackened crust, blackened hardcore, neo-crust",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb5cf2b6490e5753ea18694966",
+  "link": "https://open.spotify.com/artist/5zGxYEPyynjUkIBgKRI1Wt",
+  "__v": 0
+}]

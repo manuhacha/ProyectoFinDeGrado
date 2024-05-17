@@ -5,7 +5,7 @@ const albumSchema = new mongoose.Schema({
     artist: String,
     date: String,
     picture: String,
-    link: String
+    spotifyid: String
 })
 
 const Album = mongoose.model('albums',albumSchema)

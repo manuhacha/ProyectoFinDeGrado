@@ -26,8 +26,13 @@ router.post("/", async (req, res) => {
       link: req.body.link
     });
   
-      const result = await artist.save();
-      res.status(200).send('Artist saved succesfully');
+      try {
+        const result = await artist.save();
+        res.status(200).json("Artist saved succesfully");
+      }
+      catch (error) {
+        res.status(400).send("Error savin artists")
+      }
     }); 
     
     
