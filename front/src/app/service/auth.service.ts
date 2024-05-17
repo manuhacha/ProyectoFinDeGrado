@@ -32,12 +32,6 @@ export class AuthService {
   isLogged() {
     return !!localStorage.getItem('token')
   }
-  logout() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('email')
-    this.cookie.delete('spotifytoken')
-    this.router.navigate(['/login'])
-  }
   //Obtenemos la informacion del usuario descifrando el token, que está siendo enviado en la constante headers
   getUserbyToken(token:string) {
     const headers = new HttpHeaders({
