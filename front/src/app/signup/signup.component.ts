@@ -24,12 +24,17 @@ export class SignupComponent {
   constructor(private auth: AuthService, private router: Router) { }
 
   signUp() {
-    this.auth.signUpUser(this.signUpUser)
+    if (this.signUpUser.email && this.signUpUser.password && this.signUpUser.repeatpassword && this.signUpUser.username) {
+      this.auth.signUpUser(this.signUpUser)
       .subscribe({
         next: (res) => {
           this.router.navigate(['/login'])
         },
         error: (err) => this.err = err.error
       })
+    }
+    else {
+      this.err = 'All fields are required'
+    }
   }
 }

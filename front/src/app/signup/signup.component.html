@@ -6,19 +6,19 @@
   <form class="border border-white p-5 rounded-3 bg-black" action="" method="POST">
     <div class="mb-3">
       <label for="email" class="form-label">Email address</label>
-      <input type="email" class="form-control" [(ngModel)]="signUpUser.email" id="email" name="email" aria-describedby="emailHelp">        
+      <input required type="email" class="form-control" [(ngModel)]="signUpUser.email" id="email" name="email" aria-describedby="emailHelp">        
     </div>
     <div class="mb-3">
         <label for="username" class="form-label">Username</label>
-        <input type="text" class="form-control" [(ngModel)]="signUpUser.username" id="username" name="username">        
+        <input required type="text" class="form-control" [(ngModel)]="signUpUser.username" id="username" name="username">        
       </div>
       <div class="mb-3">
       <label for="password" class="form-label">Password</label>
-      <input type="password" class="form-control" [(ngModel)]="signUpUser.password" id="password" name="password">
+      <input required type="password" class="form-control" [(ngModel)]="signUpUser.password" id="password" name="password">
     </div>
 <div class="mb-3">
 <label for="repeatpassword" class="form-label">Repeat Password</label>
-<input type="password" class="form-control" [(ngModel)]="signUpUser.repeatpassword" id="repeatpassword" name="repeatpassword">
+<input required type="password" class="form-control" [(ngModel)]="signUpUser.repeatpassword" id="repeatpassword" name="repeatpassword">
 </div>
     <div class="mt-4 text-center">
       <button type="submit" class="btn btn-primary" (click)="signUp()">Sign up</button>
