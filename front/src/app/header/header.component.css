@@ -18,9 +18,12 @@ body {
 .dropdown>.dropdown-toggle:active {
       pointer-events: none;
   }
-.dropdown {
-    margin-right: 40px;
-}
+.dropdown-menu {
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%); 
+    top: 100%; 
+  }
 .profilepicture {
   display: block;
   margin-left: auto;

@@ -36,7 +36,7 @@
               </li>
             </ul>
             <div *ngIf="cambiarHeader()" class="dropdown d-sm-none d-md-none d-lg-block">
-              <img src="{{this.profileimage}}" class="profilepicture dropdown-toggle mx-auto" width="50px" alt="">
+              <img src="{{this.profileimage}}" class="profilepicture dropdown-toggle mx-auto d-none d-sm-block rounded-5" width="50px" alt="">
               <ul class="dropdown-menu dropdownprofile mx-auto" aria-labelledby="dropdownMenuButton">
                 <li class="nav-item">
                   <a class="dropdown-item" routerLink="profile">Profile</a>
