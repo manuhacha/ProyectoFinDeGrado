@@ -22,7 +22,8 @@ export class LoginComponent {
   constructor(private auth:AuthService, private router: Router) { }
 
   login() {
-    this.auth.loginUser(this.loginUser)
+    if (this.loginUser.email && this.loginUser.password) {
+      this.auth.loginUser(this.loginUser)
     .subscribe({
       next: (res) => {
         localStorage.setItem('token',res.jwtToken)
@@ -33,5 +34,9 @@ export class LoginComponent {
         this.err = err.error
       }
     })
+    }
+    else {
+      this.err = 'All fields are required'
+    }
   }
 }

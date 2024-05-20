@@ -80,10 +80,9 @@
                     </div>
                   </div>
                 </div>
-                <button class="btn btn-primary mx-2" type="submit">Submit</button>
               </form>
               <p *ngIf="playlisterr" class="text-center text-danger mt-4">{{this.playlisterr}}</p>
-              <div class="createbutton mx-auto text-center mt-5"><button class="playlists-button btn btn-primary">Create Spotify Playlist</button></div>
+              <div class="createbutton mx-auto text-center mt-5"><button (click)="createPlaylist()" class="playlists-button btn btn-primary">Create Spotify Playlist</button></div>
             </div>
           </div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>

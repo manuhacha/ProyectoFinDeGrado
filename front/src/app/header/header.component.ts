@@ -13,9 +13,7 @@ ProfileComponent
 })
 export class HeaderComponent {
 
-profileimage = {
-  src: ''
-}
+profileimage = 'assets/img/profile.png'
 
 constructor (private auth:AuthService) {}
 
@@ -23,7 +21,9 @@ ngOnInit() {
   this.auth.getUserbyToken(localStorage.getItem('token')!)
   .subscribe({
     next: (res) => {
-      this.profileimage.src = res.profilepic
+      if (res.profilepic) {
+        this.profileimage = res.profilepic
+      }
     },
     error: (err) => {
       console.log(err)
