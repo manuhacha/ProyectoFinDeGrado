@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { SpotifyService } from '../service/spotify.service';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,NgIf],
+  imports: [FormsModule,ReactiveFormsModule,NgIf,NgFor],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -20,7 +20,14 @@ export class ProfileComponent {
     password : '',
     repeatnewpassword : ''
   }
+  genres: { name: string, selected: boolean }[] = [
+    { name: 'Symphonic Black Metal', selected: false },
+    { name: 'Blackened Death Metal', selected: false },
+    { name: 'Melodic Black Metal', selected: false },
+    { name: 'Heavy Metal', selected: false }
+  ];
 
+  selectedGenres: string[] = [];
   //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
   link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email%20playlist-modify-private'
   id = ''
@@ -54,6 +61,19 @@ export class ProfileComponent {
   onFileSelected(event: any) {
     this.imagen = event.target.files[0]
     console.log(this.imagen)
+  }
+
+  onCheckboxChange(genre: { name: string, selected: boolean }) {
+    if (genre.selected) {
+      this.selectedGenres.push(genre.name);
+    } 
+    //Elimina el subgenero del array si esta deseleccionado
+    else {
+      const index = this.selectedGenres.indexOf(genre.name);
+      if (index > -1) {
+        this.selectedGenres.splice(index, 1);
+      }
+    }
   }
 
   //Método para actualizar usuario
@@ -121,6 +141,7 @@ export class ProfileComponent {
           console.log(err)
         }
       })
+    console.log(this.selectedGenres)  
   }
   activarCookies() {
     localStorage.setItem('cookiesaceptadas','true')

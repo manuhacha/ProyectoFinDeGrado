@@ -58,21 +58,9 @@
                   <div class="btn-group" role="group">
                     <button type="button" class="btn btn-dark dropdown-toggle mx-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subgenres</button>
                     <div class="dropdown-menu" aria-labelledby="subgenre">
-                      <div class="dropdown-item form-group">
-                        <input type="checkbox" id="norwegian" name="norwegian" value="norwegian" />
-                        <label for="norwegian">Norwegian Black Metal</label>
-                      </div>
-                      <div class="dropdown-item form-group">
-                        <input type="checkbox" id="ambiental" name="ambiental" value="ambiental" />
-                        <label for="ambiental">Ambient Black Metal</label>
-                      </div>
-                      <div class="dropdown-item form-group">
-                        <input type="checkbox" id="symphonic" name="symphonic" value="symphonic" />
-                        <label for="symphonic">Symphonic Black Metal</label>
-                      </div>
-                      <div class="dropdown-item form-group">
-                        <input type="checkbox" id="fwave" name="fwave" value="fwave" />
-                        <label for="fwave">First Wave of Black Metal</label>
+                      <div class="dropdown-item form-group" *ngFor="let genre of genres">
+                        <input type="checkbox" name="selected" [(ngModel)]="genre.selected" (change)="onCheckboxChange(genre)"/>
+                        <label for="fwave">{{ genre.name }}</label>
                       </div>
                     </div>
                     <div class="form-group">
