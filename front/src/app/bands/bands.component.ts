@@ -55,44 +55,42 @@ export class BandsComponent {
       })
   }
 
-  addBands() {
-    this.spotify.getSearchArtists('blackmetal').subscribe({
-      next: (res) => {
-        console.log(res)
-        for (let i = 0; i < res.artists.items.length; i++) {
-          // Verificar que genres sea un array antes de usarlo
-          if (Array.isArray(res.artists.items[i].genres)) {
-            const genresArray: string[] = res.artists.items[i].genres.slice(0, 3)
-            const artist = {
-              name: res.artists.items[i].name,
-              genre: genresArray.join(', '),
-              picture: res.artists.items[i].images[0].url,
-              link: res.artists.items[i].external_urls.spotify
-            };
-            this.service.createArtist(artist).subscribe({
-              next: (res) => {
-                console.log('Band created successfully');
-              },
-              error: (err) => {
-                console.log('Error creating band');
-              }
-            });
-          } else {
-            console.log('Genres is not an array');
-          }
-        }
-      },
-      error: (err) => {
-        console.log('Error getting Spotify artists');
-      }
-    });
-  }
+  // addBands() {
+  //   this.spotify.getSearchArtists('blackmetal').subscribe({
+  //     next: (res) => {
+  //       console.log(res)
+  //       for (let i = 0; i < res.artists.items.length; i++) {
+  //         // Verificar que genres sea un array antes de usarlo
+  //         if (Array.isArray(res.artists.items[i].genres)) {
+  //           const genresArray: string[] = res.artists.items[i].genres.slice(0, 3)
+  //           const artist = {
+  //             name: res.artists.items[i].name,
+  //             genre: genresArray.join(', '),
+  //             picture: res.artists.items[i].images[0].url,
+  //             link: res.artists.items[i].external_urls.spotify
+  //           };
+  //           this.service.createArtist(artist).subscribe({
+  //             next: (res) => {
+  //               console.log('Band created successfully');
+  //             },
+  //             error: (err) => {
+  //               console.log('Error creating band');
+  //             }
+  //           });
+  //         } else {
+  //           console.log('Genres is not an array');
+  //         }
+  //       }
+  //     },
+  //     error: (err) => {
+  //       console.log('Error getting Spotify artists');
+  //     }
+  //   });
+  // }
   createArtist() {
-    console.log(this.artistid)
     this.spotify.getArtistbyId(this.artistid)
       .subscribe({
         next: (res) => {
-          console.log(res)
           this.newband.link = res.external_urls.spotify
           this.newband.picture = res.images[0].url
           this.newband.name = res.name

@@ -13,6 +13,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
+  //Clase con los datos del usuario
   updateUser = {
     email: '',
     username: '',
@@ -20,13 +21,19 @@ export class ProfileComponent {
     password : '',
     repeatnewpassword : ''
   }
-  genres: { name: string, selected: boolean }[] = [
-    { name: 'Symphonic Black Metal', selected: false },
-    { name: 'Blackened Death Metal', selected: false },
-    { name: 'Melodic Black Metal', selected: false },
-    { name: 'Heavy Metal', selected: false }
+  //Array de generos seleccionables para la creacion de playlists
+  genres: { name: string, selected: boolean,value: string }[] = [
+    { name: 'Symphonic Black Metal', selected: false,value: 'symphonic black metal' },
+    { name: 'Melodic Black Metal', selected: false,value: 'melodic black metal' },
+    { name: 'Norwegian Black Metal', selected: false,value: 'norwegian black metal' },
+    { name: 'Depressive Suicidal Black Metal', selected: false,value: 'emotional black metal' },
+    { name: 'Atmospheric Black Metal', selected: false,value: 'atmospheric black metal' },
+    { name: 'Dungeon Synth', selected: false,value: 'dungeon synth' },
+    { name: 'Dungeon Synth', selected: false,value: "black 'n' roll" }
   ];
-
+  //Array para las canciones que se añadiran a la playlist 
+  tracks: string[] = []
+  uris = {}
   selectedGenres: string[] = [];
   //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
   link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email%20playlist-modify-private'
@@ -38,8 +45,10 @@ export class ProfileComponent {
   cookiemsg = 'Cookies are turned off'
   profilepic = ''
   imagen?: File;
+  playlistid = ''
   constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService) { }
 
+  //Ejecutamos el método para obtener la informacion del usuario a partir del token
   ngOnInit() {
     if (localStorage.getItem('cookiesaceptadas') === 'true') {
       this.cookiemsg = 'Cookies are turned on'
@@ -63,15 +72,16 @@ export class ProfileComponent {
     console.log(this.imagen)
   }
 
+  //Metemos los generos seleccionados en un array
   onCheckboxChange(genre: { name: string, selected: boolean }) {
     if (genre.selected) {
       this.selectedGenres.push(genre.name);
     } 
     //Elimina el subgenero del array si esta deseleccionado
     else {
-      const index = this.selectedGenres.indexOf(genre.name);
-      if (index > -1) {
-        this.selectedGenres.splice(index, 1);
+      const i = this.selectedGenres.indexOf(genre.name);
+      if (i > -1) {
+        this.selectedGenres.splice(i, 1);
       }
     }
   }
@@ -116,6 +126,7 @@ export class ProfileComponent {
     }
   }
 
+  //Obtiene el perfil de spotify, necesario para crear la playlist
   getSpotifyProfile() {
     if (localStorage.getItem('cookiesaceptadas') === 'true') {
       this.Spotify.getUserProfile()
@@ -131,17 +142,42 @@ export class ProfileComponent {
       this.playlisterr = 'You cant use Spotify Services if cookies are not accepted, you can change this in the Profile Tab'
     }
   }
+  //Método para la creacion de playlists
   createPlaylist() {
     this.Spotify.createPlaylist(this.spotifyuserid)
       .subscribe({
         next: (res) => {
-          console.log(res)
+          this.playlistid = res.id
+          //Busco los generos y los meto en un array
+        this.Spotify.getTrackbyGenre('symphonic black metal',10)
+      .subscribe({
+        next: (res) => {
+          for (let i = 0; i < res.tracks.items.length; i++) {
+            const song = res.tracks.items[i].uri;
+            this.tracks.push(song)
+          }
+          this.uris = {"uris": this.tracks}
+          this.uris = JSON.stringify(this.uris, null, 4)
+          //Añado las canciones a la playlist
+          this.Spotify.addTrackToPlaylist(this.playlistid,this.uris)
+            .subscribe({
+              next: (res) => {
+                console.log('Playlist Created Succesfully')
+              },
+              error: (err) => {
+                console.log(err)
+              }
+            })
         },
         error: (err) => {
           console.log(err)
         }
       })
-    console.log(this.selectedGenres)  
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
   }
   activarCookies() {
     localStorage.setItem('cookiesaceptadas','true')
