@@ -29,12 +29,11 @@ export class ProfileComponent {
     { name: 'Depressive Suicidal Black Metal', selected: false,value: 'emotional black metal' },
     { name: 'Atmospheric Black Metal', selected: false,value: 'atmospheric black metal' },
     { name: 'Dungeon Synth', selected: false,value: 'dungeon synth' },
-    { name: 'Dungeon Synth', selected: false,value: "black 'n' roll" }
   ];
   //Array para las canciones que se añadiran a la playlist 
   tracks: string[] = []
   uris = {}
-  selectedGenres: string[] = [];
+  selectedGenre: string = ''
   //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
   link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email%20playlist-modify-private'
   id = ''
@@ -42,10 +41,12 @@ export class ProfileComponent {
   err = ''
   msg = ''
   playlisterr = ''
+  playlistmsg = ''
   cookiemsg = 'Cookies are turned off'
   profilepic = ''
   imagen?: File;
   playlistid = ''
+  numerocanciones = null
   constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService) { }
 
   //Ejecutamos el método para obtener la informacion del usuario a partir del token
@@ -73,17 +74,8 @@ export class ProfileComponent {
   }
 
   //Metemos los generos seleccionados en un array
-  onCheckboxChange(genre: { name: string, selected: boolean }) {
-    if (genre.selected) {
-      this.selectedGenres.push(genre.name);
-    } 
-    //Elimina el subgenero del array si esta deseleccionado
-    else {
-      const i = this.selectedGenres.indexOf(genre.name);
-      if (i > -1) {
-        this.selectedGenres.splice(i, 1);
-      }
-    }
+  onRadioChange(selectedGenre: string) {
+    this.selectedGenre = selectedGenre;
   }
 
   //Método para actualizar usuario
@@ -149,7 +141,11 @@ export class ProfileComponent {
         next: (res) => {
           this.playlistid = res.id
           //Busco los generos y los meto en un array
-        this.Spotify.getTrackbyGenre('symphonic black metal',10)
+        if (this.numerocanciones!>100) {
+          this.playlisterr = 'The maximum number of songs to add is 100'
+        }
+        else {
+          this.Spotify.getTrackbyGenre(this.selectedGenre,this.numerocanciones!)
       .subscribe({
         next: (res) => {
           for (let i = 0; i < res.tracks.items.length; i++) {
@@ -173,6 +169,8 @@ export class ProfileComponent {
           console.log(err)
         }
       })
+        }  
+        
         },
         error: (err) => {
           console.log(err)

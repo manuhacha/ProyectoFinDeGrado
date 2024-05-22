@@ -1,4 +1,4 @@
-<body style="background-image: url(assets/img/background.png);">
+<body style="background-image: url(assets/img/background.png);background-repeat: no-repeat;background-size: cover;">
   <div *ngIf="this.adminemail" class="createalbums text-center">
     <button (click)="addArtist()" class="btn btn-primary my-4 p-2">Add Band</button>
   </div>
@@ -13,16 +13,21 @@
       </div>
     </form>
   </div>
-    <div class="row w-100">
-      <div class="col-md-auto d-flex flex-column mx-auto" *ngFor="let band of bands">
-        <div class="card bands mx-auto border border-dark" style="width: 25rem">
-          <img [src]="band.picture" class="card-img-top" width="400px" alt="Album Cover"/>
-          <div class="card-body mx-auto text-center">
-            <h2 class="card-title">{{ band.name }}</h2>
-            <p class="card-text">{{ band.genre }}</p>
-            <a [href]="band.link" class="btn btn-dark mx-auto">Listen on Spotify</a>
-          </div>
+  <div class="row w-100">
+    <div class="col-md-auto d-flex flex-column mx-auto" *ngFor="let band of paginatedBands">
+      <div class="card bands mx-auto border border-dark" style="width: 25rem">
+        <img [src]="band.picture" class="card-img-top" width="400px" alt="Album Cover"/>
+        <div class="card-body mx-auto text-center">
+          <h2 class="card-title">{{ band.name }}</h2>
+          <p class="card-text">{{ band.genre }}</p>
+          <a [href]="band.link" class="btn btn-dark mx-auto">Listen on Spotify</a>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+  <div class="pagination d-flex justify-content-center text-center py-5">
+    <button *ngFor="let page of [].constructor(totalPages()); let i = index" (click)="changePage(i + 1)" [disabled]="currentPage === i + 1" class="py-2 btn btn-light mx-1">
+      {{ i + 1 }}
+    </button>
+  </div>
+</body>

@@ -25,7 +25,8 @@ export class BandsComponent {
   }
 
   genreArray = ''
-
+  currentPage: number = 1;
+  itemsPerPage: number = 12;
   bands: any[] = []
 
   
@@ -111,5 +112,19 @@ export class BandsComponent {
   }
   addArtist() {
     this.togglealbumcreation = true
+  }
+  // Métodos de paginación
+  get paginatedBands(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.bands.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.bands.length / this.itemsPerPage);
   }
 }
