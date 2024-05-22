@@ -47,6 +47,6 @@ export class SpotifyService {
     return this.http.get<any>(this.searchUrl + "genre=" + genre + '&limit=' + limit + '&type=track',this.config)
   }
   addTrackToPlaylist(id:string,uris: {}) {
-    return this.http.post<any>(this.addTracksPlaylistUrl + id + '/tracks',{uris:uris},this.config)
+    return this.http.post<any>(this.addTracksPlaylistUrl + id + '/tracks',uris,this.config)
   }
 }

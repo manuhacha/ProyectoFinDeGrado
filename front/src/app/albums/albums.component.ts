@@ -27,6 +27,8 @@ export class AlbumsComponent {
     picture: '',
     spotifyid: ''
   }
+  currentPage: number = 1;
+  itemsPerPage: number = 12;
   
   constructor(private service: AlbumsService, private spotify: SpotifyService,private auth: AuthService, private pservice: PreviewService, private router: Router) { }
 
@@ -87,5 +89,19 @@ export class AlbumsComponent {
     this.router.navigate(['preview'])
   }
   
+  // Métodos de paginación
+  get paginatedAlbums(): any[] {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    return this.albums.slice(startIndex, endIndex);
+  }
+
+  changePage(page: number): void {
+    this.currentPage = page;
+  }
+
+  totalPages(): number {
+    return Math.ceil(this.albums.length / this.itemsPerPage);
+  }
 }
   
