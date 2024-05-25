@@ -60,7 +60,6 @@ export class AlbumsComponent {
     this.togglealbumcreation = true
   }
   createAlbum() {
-    console.log(this.albumid)
     this.spotify.getAlbumbyId(this.albumid)
       .subscribe({
         next: (res) => {

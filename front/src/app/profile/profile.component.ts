@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { AuthService } from '../service/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
-import { SpotifyService } from '../service/spotify.service';
+
 import { CookieService } from 'ngx-cookie-service';
+import { SpotifyService } from '../service/spotify.service';
+import { AlbumsService } from '../service/albums.service';
 
 @Component({
   selector: 'app-profile',
@@ -35,19 +37,30 @@ export class ProfileComponent {
   uris = {}
   selectedGenre: string = ''
   //Este enlace debería de ser construido a partir de variables de entorno, pero para este caso, no lo he visto necesario
-  link = 'https://accounts.spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email%20playlist-modify-private'
+  link = 'https://accounts.Spotify.com/authorize?client_id=f4d50a9da82a4243b90423c1043f355e&response_type=token&redirect_uri=http://localhost:4200/&scope=user-read-private%20user-read-email%20playlist-modify-private'
   id = ''
-  spotifyuserid = ''
+  Spotifyuserid = ''
   err = ''
   msg = ''
   playlisterr = ''
   playlistmsg = ''
+  useralbumserr = ''
   cookiemsg = 'Cookies are turned off'
   profilepic = ''
   imagen?: File;
   playlistid = ''
   numerocanciones = null
-  constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService) { }
+  albumid = ''
+  newalbum = {
+    name: '',
+    artist: '',
+    date: '',
+    picture: '',
+    spotifyid: '',
+    userid: ''
+  }
+  useralbums:any[] = []
+  constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService, private service: AlbumsService) { }
 
   //Ejecutamos el método para obtener la informacion del usuario a partir del token
   ngOnInit() {
@@ -66,6 +79,15 @@ export class ProfileComponent {
         console.log(err)
       }
     })
+    this.service.getCommunityAlbumsbyId(this.id)
+      .subscribe({
+        next: (res) => {
+          this.useralbums = res
+        },
+        error: (err) => {
+          this.useralbumserr = err
+        }
+      })
   }
 
   onFileSelected(event: any) {
@@ -118,13 +140,13 @@ export class ProfileComponent {
     }
   }
 
-  //Obtiene el perfil de spotify, necesario para crear la playlist
+  //Obtiene el perfil de Spotify, necesario para crear la playlist
   getSpotifyProfile() {
     if (localStorage.getItem('cookiesaceptadas') === 'true') {
       this.Spotify.getUserProfile()
       .subscribe({
         next: (res) => {
-          this.spotifyuserid = res.id
+          this.Spotifyuserid = res.id
         },
         error: (err) => {
         }
@@ -136,7 +158,7 @@ export class ProfileComponent {
   }
   //Método para la creacion de playlists
   createPlaylist() {
-    this.Spotify.createPlaylist(this.spotifyuserid)
+    this.Spotify.createPlaylist(this.Spotifyuserid)
       .subscribe({
         next: (res) => {
           this.playlistid = res.id
@@ -184,5 +206,27 @@ export class ProfileComponent {
   desactivarCookies() {
     localStorage.setItem('cookiesaceptadas','false')
     location.reload()
+  }
+  createAlbum() {
+    this.Spotify.getAlbumbyId(this.albumid)
+    .subscribe({
+      next: (res) => {
+        this.newalbum.spotifyid = this.albumid
+        this.newalbum.name = res.name
+        this.newalbum.artist = res.artists[0].name
+        this.newalbum.date = res.release_date
+        this.newalbum.picture = res.images[0].url
+        this.newalbum.userid = this.updateUser.username
+        this.service.createCommunityAlbum(this.newalbum)
+          .subscribe({
+            next: (res) => {
+              location.reload()  
+            }
+          })
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
   }
 }
