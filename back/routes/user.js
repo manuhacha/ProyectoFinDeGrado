@@ -66,6 +66,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       return res.status(400).send("Email or username already exists");
     }
     //Comprobamos las contraseñas
+    console.log(req.body.password)
     if (req.body.password) {
       if (req.body.password !== req.body.repeatnewpassword) {
         return res.status(400).send("Passwords do not match");
@@ -73,6 +74,9 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       if (req.body.oldpassword !== usernameexists[0].password) {
         return res.status(400).send("Old password is incorrect");
       }
+    }
+    if (!req.body.password) {
+      return res.status(400).send("New password is blank")
     }
     // Sacamos los datos del usuario por id
     const user = await User.findById(id);

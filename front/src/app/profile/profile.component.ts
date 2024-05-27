@@ -63,7 +63,6 @@ export class ProfileComponent {
         this.profilepic = res.profilepic
       },
       error: (err) => {
-        console.log(err)
       }
     })
   }
@@ -127,6 +126,7 @@ export class ProfileComponent {
           this.spotifyuserid = res.id
         },
         error: (err) => {
+          this.playlisterr = 'You have to Log In via Spotify to Create a Playlist'
         }
       })
     }
@@ -136,15 +136,15 @@ export class ProfileComponent {
   }
   //Método para la creacion de playlists
   createPlaylist() {
-    this.Spotify.createPlaylist(this.spotifyuserid)
+    if (this.numerocanciones!>100 || this.numerocanciones!<1) {
+      this.playlisterr = 'You have to type a number between 1 and 100'
+    }
+    else {
+      this.Spotify.createPlaylist(this.spotifyuserid)
       .subscribe({
         next: (res) => {
           this.playlistid = res.id
           //Busco los generos y los meto en un array
-        if (this.numerocanciones!>100) {
-          this.playlisterr = 'The maximum number of songs to add is 100'
-        }
-        else {
           this.Spotify.getTrackbyGenre(this.selectedGenre,this.numerocanciones!)
       .subscribe({
         next: (res) => {
@@ -158,10 +158,11 @@ export class ProfileComponent {
           this.Spotify.addTrackToPlaylist(this.playlistid,this.uris)
             .subscribe({
               next: (res) => {
-                console.log('Playlist Created Succesfully')
+                this.playlistmsg = 'Playlist Created Succesfully'
+                this.playlisterr = ''
               },
               error: (err) => {
-                console.log(err)
+                this.playlisterr = err
               }
             })
         },
@@ -169,20 +170,14 @@ export class ProfileComponent {
           console.log(err)
         }
       })
-        }  
         
         },
         error: (err) => {
-          console.log(err)
+          this.playlisterr = err
         }
       })
   }
-  activarCookies() {
-    localStorage.setItem('cookiesaceptadas','true')
-    location.reload()
-  }
-  desactivarCookies() {
-    localStorage.setItem('cookiesaceptadas','false')
-    location.reload()
-  }
+    }
+    
+
 }

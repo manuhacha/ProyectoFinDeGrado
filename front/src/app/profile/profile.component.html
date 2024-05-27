@@ -7,8 +7,6 @@
             type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Create Playlists</button>
           <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
             type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Add your Work</button>
-          <button class="nav-link" id="v-pills-cookie-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cookie"
-            type="button" role="tab" aria-controls="v-pills-cookie" aria-selected="false">Cookie Settings</button>
         </div>
         <div class="tab-content w-50" id="v-pills-tabContent">
           <div class="tab-pane bg-black border border-white rounded-3 show active" id="v-pills-home" role="tabpanel"
@@ -70,18 +68,11 @@
                 </div>
               </form>
               <p *ngIf="playlisterr" class="text-center text-danger mt-4">{{this.playlisterr}}</p>
-              <p *ngIf="playlistmsg" class="text-center text-success mt-4">{{this.playlisterr}}</p>
+              <p *ngIf="playlistmsg" class="text-center text-success mt-4">{{this.playlistmsg}}</p>
               <div class="createbutton mx-auto text-center mt-5"><button (click)="createPlaylist()" class="playlists-button btn btn-primary">Create Spotify Playlist</button></div>
             </div>
           </div>
           <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
-          <div class="tab-pane cookies fade" id="v-pills-cookie" role="tabpanel" aria-labelledby="v-pills-cookie-tab">
-           <div class="cookiescontainer text-center bg-black p-3 border border-white rounded-3">
-            <button (click)="activarCookies()" class="cookiebtn btn btn-success mx-2">Turn Cookies On</button>
-            <button (click)="desactivarCookies()" class="cookiebtn btn btn-danger mx-2">Turn Cookies Off</button>
-            <p *ngIf="cookiemsg" class="text-success text-center error mt-4">{{cookiemsg}}</p>
-           </div>
-          </div>
         </div>
       </div>
 </body>
