@@ -28,4 +28,7 @@ export class AlbumsService {
   getCommunityAlbumsbyId(userid:string) {
     return this.http.get<any>(this.communityalbums + '/' + userid)
   }
+  deleteCommunityAlbum(userid: string) {
+    return this.http.delete<any>(this.communityalbums + '/' + userid)
+  }
 }

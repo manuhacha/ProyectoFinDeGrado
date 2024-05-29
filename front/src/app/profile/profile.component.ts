@@ -44,8 +44,8 @@ export class ProfileComponent {
   msg = ''
   playlisterr = ''
   playlistmsg = ''
+  communityalbumerr = ''
   useralbumserr = ''
-  cookiemsg = 'Cookies are turned off'
   profilepic = ''
   imagen?: File;
   playlistid = ''
@@ -64,9 +64,6 @@ export class ProfileComponent {
 
   //Ejecutamos el método para obtener la informacion del usuario a partir del token
   ngOnInit() {
-    if (localStorage.getItem('cookiesaceptadas') === 'true') {
-      this.cookiemsg = 'Cookies are turned on'
-    }
     this.auth.getUserbyToken(localStorage.getItem('token')!)
     .subscribe({
       next: (res) => {
@@ -76,6 +73,7 @@ export class ProfileComponent {
         this.profilepic = res.profilepic
       },
       error: (err) => {
+        console.log(err)
       }
     })
     this.service.getCommunityAlbumsbyId(this.id)
@@ -142,15 +140,20 @@ export class ProfileComponent {
   //Obtiene el perfil de Spotify, necesario para crear la playlist
   getSpotifyProfile() {
     if (localStorage.getItem('cookiesaceptadas') === 'true') {
-      this.Spotify.getUserProfile()
-      .subscribe({
-        next: (res) => {
-          this.Spotifyuserid = res.id
-        },
-        error: (err) => {
-          this.playlisterr = 'You have to Log In via Spotify to Create a Playlist'
-        }
-      })
+      if (this.cookie.get('spotifytoken')) {
+        this.Spotify.getUserProfile()
+        .subscribe({
+          next: (res) => {
+            this.Spotifyuserid = res.id
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        })
+      }
+      else {
+        this.playlisterr = 'You have to Log In via Spotify to Create a Playlist'
+      }
     }
     else {
       this.playlisterr = 'You cant use Spotify Services if cookies are not accepted, you can change this in the Profile Tab'
@@ -158,7 +161,7 @@ export class ProfileComponent {
   }
   //Método para la creacion de playlists
   createPlaylist() {
-    this.Spotify.createPlaylist(this.Spotifyuserid)
+    if (this.cookie.get('spotifytoken')) {
     if (this.numerocanciones!>100 || this.numerocanciones!<1) {
       this.playlisterr = 'You have to type a number between 1 and 100'
     }
@@ -200,10 +203,15 @@ export class ProfileComponent {
         }
       })
   }
+}
+else {
+  this.playlisterr = 'You have to Log In via Spotify to Create a Playlist'
+}
   }
 
   createAlbum() {
-    this.Spotify.getAlbumbyId(this.albumid)
+    if (this.cookie.get('spotifytoken')) {
+      this.Spotify.getAlbumbyId(this.albumid)
     .subscribe({
       next: (res) => {
         this.newalbum.spotifyid = this.albumid
@@ -223,5 +231,21 @@ export class ProfileComponent {
         console.log(err)
       }
     })
+    }
+    else {
+      this.communityalbumerr = 'You have to Log In to Spotify'
+    }
+  }
+
+  deleteAlbum() {
+    this.service.deleteCommunityAlbum(this.useralbums[0]._id)
+      .subscribe({
+        next: (res) => {
+          location.reload()
+        },
+        error: (err) => {
+          console.log(err)
+        } 
+      })
   }
 }

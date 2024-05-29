@@ -36,6 +36,16 @@ router.get("/:userid", async (req, res) => {
 //Creamos el método post para subir albumes
 router.post("/", async (req, res) => {
 
+  let hasanalbum = await CommunityAlbums.findOne({ userid: req.body.userid });
+
+  console.log(hasanalbum)
+  //Vemos si el usuario ya tiene un album
+  if (hasanalbum) {
+    res.status(400).json("You already have an album uploaded")
+  }
+  //Si no lo tiene, lo creamos
+  else {
+
     let communityalbums = new CommunityAlbums({
       name: req.body.name,
       artist: req.body.artist,
@@ -52,5 +62,22 @@ router.post("/", async (req, res) => {
       catch (error) {
         res.status(400).send("Error creating album")
       }
+  }
     }); 
+    //Metodo para borrar el usuario
+    router.delete('/:userid', async (req, res) => {
+      try {
+        const userId = req.params;
+        const deletedAlbum = await CommunityAlbums.findByIdAndDelete(userId);
+        //Si no existe ese usuario, cosa que no debería de pasar nunca, le enviamos este error
+        if (!deletedAlbum) {
+          return res.status(404).json("User not found");
+        }
+    
+        res.status(200).json("Album deleted successfully");
+      } catch (error) {
+        res.status(500).json("Error deleting Album");
+      }
+    });
+
 module.exports = router;
