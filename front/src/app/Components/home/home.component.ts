@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import Swal from 'sweetalert2';
 import { Router, RouterLink } from '@angular/router';
-import { PreviewService } from '../service/preview.service';
+import { PreviewService } from '../../service/preview.service';
 
 @Component({
   selector: 'app-home',

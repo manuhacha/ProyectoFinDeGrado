@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { BandsService } from '../service/bands.service';
+import { BandsService } from '../../service/bands.service';
 import { NgFor, NgIf } from '@angular/common';
-import { SpotifyService } from '../service/spotify.service';
+import { SpotifyService } from '../../service/spotify.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-bands',

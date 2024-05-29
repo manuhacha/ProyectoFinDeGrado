@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { PreviewService } from '../service/preview.service';
+import { PreviewService } from '../../service/preview.service';
 
 @Component({
   selector: 'app-album-preview',

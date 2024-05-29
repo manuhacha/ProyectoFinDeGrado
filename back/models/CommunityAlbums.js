@@ -6,7 +6,8 @@ const communityalbumsSchema = new mongoose.Schema({
     date: String,
     picture: String,
     spotifyid: String,
-    userid: String
+    userid: String,
+    link: String
 })
 
 const CommunityAlbums = mongoose.model('communityalbums',communityalbumsSchema)

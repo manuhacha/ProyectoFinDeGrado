@@ -8,7 +8,7 @@
           <button class="nav-link" id="v-pills-addwork-tab" data-bs-toggle="pill" data-bs-target="#v-pills-addwork"
             type="button" role="tab" aria-controls="v-pills-addwork" aria-selected="false">Add your Work</button>
             <button class="nav-link" id="v-pills-youralbums-tab" data-bs-toggle="pill" data-bs-target="#v-pills-youralbums"
-            type="button" role="tab" aria-controls="v-pills-youralbums" aria-selected="false">Your albums</button>
+            type="button" role="tab" aria-controls="v-pills-youralbums" aria-selected="false">Your album</button>
         </div>
         <div class="tab-content w-50" id="v-pills-tabContent">
           <div class="tab-pane bg-black border border-white rounded-3 show active" id="v-pills-home" role="tabpanel"
@@ -91,22 +91,23 @@
             </div>
           </div>
           <div class="tab-pane youralbums fade" id="v-pills-youralbums" role="tabpanel" aria-labelledby="v-pills-youralbums-tab">
-            <div class="row w-100">
-              <div class="col-md-auto d-flex flex-column mx-auto" *ngFor="let album of useralbums">
+            <div *ngIf="useralbums && useralbums.length > 0" class="row w-100">
+              <div class="col-md-auto d-flex flex-column mx-auto communityalbums" *ngFor="let album of useralbums">
                 <div class="card albums mx-auto border border-dark" style="width: 25rem">
                   <img [src]="album.picture" class="card-img-top" width="400px" alt="Album Cover"/>
                   <div class="card-body mx-auto text-center">
                     <h2 class="card-title">{{ album.name }}</h2>
                     <p class="card-text">{{ album.artist }}</p>
                     <p class="card-text">{{ album.date }}</p>
-                    <p class="card-text">{{ album.userid }}</p>
                   </div>
                 </div>
               </div>
+              <div class="text-center mt-3">
+                <button (click)="deleteAlbum()" class="btn btn-danger mx-auto">Delete Album</button>
+              </div>
             </div>
-            <p class="text-danger error" *ngIf="useralbumserr">{{useralbumserr}}</p>
-            <div class="text-center mt-3"><button (click)="deleteAlbum()" class="btn btn-danger mx-auto">Delete Album</button></div>
-           </div>
+            <p class="text-danger error text-center" *ngIf="useralbumserr">{{useralbumserr}}</p>
+          </div>          
         </div>
       </div>
 </body>

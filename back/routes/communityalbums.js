@@ -52,7 +52,8 @@ router.post("/", async (req, res) => {
       date: req.body.date,
       picture: req.body.picture,
       spotifyid: req.body.spotifyid,
-      userid: req.body.userid
+      userid: req.body.userid,
+      link: req.body.link
     });
   
       try {
@@ -65,10 +66,10 @@ router.post("/", async (req, res) => {
   }
     }); 
     //Metodo para borrar el usuario
-    router.delete('/:userid', async (req, res) => {
+    router.delete('/:id', async (req, res) => {
       try {
-        const userId = req.params;
-        const deletedAlbum = await CommunityAlbums.findByIdAndDelete(userId);
+        const { id } = req.params;
+        const deletedAlbum = await CommunityAlbums.findByIdAndDelete(id);
         //Si no existe ese usuario, cosa que no debería de pasar nunca, le enviamos este error
         if (!deletedAlbum) {
           return res.status(404).json("User not found");

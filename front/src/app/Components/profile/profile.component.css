@@ -22,3 +22,11 @@ body {
 .addwork {
     padding-bottom: 245px;
 }
+.card-title {
+        font-family: 'OldLondon', sans-serif;
+        font-size: 33px;
+}
+.card-text {
+    font-family: 'OldLondon', cursive;
+    font-size: 30px;
+}

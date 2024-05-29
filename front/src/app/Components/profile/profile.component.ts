@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgFor, NgIf } from '@angular/common';
 
 import { CookieService } from 'ngx-cookie-service';
-import { SpotifyService } from '../service/spotify.service';
-import { AlbumsService } from '../service/albums.service';
+import { SpotifyService } from '../../service/spotify.service';
+import { AlbumsService } from '../../service/albums.service';
 
 @Component({
   selector: 'app-profile',
@@ -57,7 +57,8 @@ export class ProfileComponent {
     date: '',
     picture: '',
     spotifyid: '',
-    userid: ''
+    userid: '',
+    link: ''
   }
   useralbums:any[] = []
   constructor(private auth: AuthService, private Spotify: SpotifyService, private cookie: CookieService, private service: AlbumsService) { }
@@ -82,7 +83,7 @@ export class ProfileComponent {
           this.useralbums = res
         },
         error: (err) => {
-          this.useralbumserr = err
+          this.useralbumserr = err.error
         }
       })
   }
@@ -220,10 +221,14 @@ else {
         this.newalbum.date = res.release_date
         this.newalbum.picture = res.images[0].url
         this.newalbum.userid = this.updateUser.username
+        this.newalbum.link = res.external_urls.spotify
         this.service.createCommunityAlbum(this.newalbum)
           .subscribe({
             next: (res) => {
               location.reload()  
+            },
+            error: (err) => {
+              this.communityalbumerr = err.error
             }
           })
       },

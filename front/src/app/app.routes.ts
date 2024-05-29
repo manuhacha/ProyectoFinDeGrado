@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import { BandsComponent } from './bands/bands.component';
-import { AlbumsComponent } from './albums/albums.component';
-import { ProfileComponent } from './profile/profile.component';
+import { HomeComponent } from './Components/home/home.component';
+import { LoginComponent } from './Components/login/login.component';
+import { SignupComponent } from './Components/signup/signup.component';
+import { BandsComponent } from './Components/bands/bands.component';
+import { AlbumsComponent } from './Components/albums/albums.component';
+import { ProfileComponent } from './Components/profile/profile.component';
 import { AuthGuard } from './guard/auth.guard';
-import { AlbumPreviewComponent } from './album-preview/album-preview.component';
+import { AlbumPreviewComponent } from './Components/album-preview/album-preview.component';
+import { CommunityalbumsComponent } from './Components/communityalbums/communityalbums.component';
 
 export const routes: Routes = [
     {
@@ -38,5 +39,9 @@ export const routes: Routes = [
     {
         path: 'preview',
         component: AlbumPreviewComponent
+    },
+    {
+        path: 'communityalbums',
+        component: CommunityalbumsComponent
     }
 ];

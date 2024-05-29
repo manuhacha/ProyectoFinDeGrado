@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { SpotifyService } from '../service/spotify.service';
-import { AlbumsService } from '../service/albums.service';
+import { SpotifyService } from '../../service/spotify.service';
+import { AlbumsService } from '../../service/albums.service';
 import { NgFor, NgIf } from '@angular/common';
-import { AuthService } from '../service/auth.service';
+import { AuthService } from '../../service/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PreviewService } from '../service/preview.service';
+import { PreviewService } from '../../service/preview.service';
 import { Router } from '@angular/router';
 
 @Component({
