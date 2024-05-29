@@ -8,6 +8,7 @@ import { BandsService } from './bands.service';
 export class AlbumsService {
 
   private getAlbumsUrl = "http://localhost:3000/api/v1/album"
+  private communityalbums = 'http://localhost:3000/api/v1/communityalbums'
 
 
   constructor(private http: HttpClient, private bandsservice: BandsService) { }
@@ -17,5 +18,14 @@ export class AlbumsService {
   }
   createAlbum(album:any) {
     return this.http.post<any>(this.getAlbumsUrl,album)
+  }
+  getCommunityAlbums() {
+    return this.http.get<any>(this.communityalbums)
+  } 
+  createCommunityAlbum(communityalbum:any) {
+    return this.http.post<any>(this.communityalbums,communityalbum)
+  }
+  getCommunityAlbumsbyId(userid:string) {
+    return this.http.get<any>(this.communityalbums + '/' + userid)
   }
 }

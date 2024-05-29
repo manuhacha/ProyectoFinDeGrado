@@ -5,8 +5,12 @@
             type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Edit Profile</button>
           <button (click)="getSpotifyProfile()" class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile"
             type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Create Playlists</button>
-          <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings"
-            type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Add your Work</button>
+          <button class="nav-link" id="v-pills-addwork-tab" data-bs-toggle="pill" data-bs-target="#v-pills-addwork"
+            type="button" role="tab" aria-controls="v-pills-addwork" aria-selected="false">Add your Work</button>
+            <button class="nav-link" id="v-pills-youralbums-tab" data-bs-toggle="pill" data-bs-target="#v-pills-youralbums"
+            type="button" role="tab" aria-controls="v-pills-youralbums" aria-selected="false">Your albums</button>
+          <button class="nav-link" id="v-pills-cookie-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cookie"
+            type="button" role="tab" aria-controls="v-pills-cookie" aria-selected="false">Cookie Settings</button>
         </div>
         <div class="tab-content w-50" id="v-pills-tabContent">
           <div class="tab-pane bg-black border border-white rounded-3 show active" id="v-pills-home" role="tabpanel"
@@ -72,7 +76,42 @@
               <div class="createbutton mx-auto text-center mt-5"><button (click)="createPlaylist()" class="playlists-button btn btn-primary">Create Spotify Playlist</button></div>
             </div>
           </div>
-          <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+          <div class="tab-pane fade" id="v-pills-addwork" role="tabpanel" aria-labelledby="v-pills-addwork-tab">
+            <div class="formulario container-fluid d-flex justify-content-center">
+              <form class="form border border-white mb-5 text-white p-5 rounded-3 bg-black">
+                <div class="mb-3">
+                  <label for="email" class="form-label">Spotify Album Id</label>
+                  <input type="text" [(ngModel)]="albumid" class="form-control" name="albumid" aria-describedby="emailHelp">        
+                </div>
+                <div class="mt-4 text-center">
+                  <button type="submit" (click)="createAlbum()" class="btn btn-primary">Add Album To Database</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="tab-pane cookies fade" id="v-pills-youralbums" role="tabpanel" aria-labelledby="v-pills-youralbums-tab">
+            <div class="row w-100">
+              <div class="col-md-auto d-flex flex-column mx-auto" *ngFor="let album of useralbums">
+                <div class="card albums mx-auto border border-dark" style="width: 25rem">
+                  <img [src]="album.picture" class="card-img-top" width="400px" alt="Album Cover"/>
+                  <div class="card-body mx-auto text-center">
+                    <h2 class="card-title">{{ album.name }}</h2>
+                    <p class="card-text">{{ album.artist }}</p>
+                    <p class="card-text">{{ album.date }}</p>
+                    <p class="card-text">{{ album.userid }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p *ngIf="useralbumserr">{{useralbumserr}}</p>
+           </div>
+          <div class="tab-pane cookies fade" id="v-pills-cookie" role="tabpanel" aria-labelledby="v-pills-cookie-tab">
+           <div class="cookiescontainer text-center bg-black p-3 border border-white rounded-3">
+            <button (click)="activarCookies()" class="cookiebtn btn btn-success mx-2">Turn Cookies On</button>
+            <button (click)="desactivarCookies()" class="cookiebtn btn btn-danger mx-2">Turn Cookies Off</button>
+            <p *ngIf="cookiemsg" class="text-success text-center error mt-4">{{cookiemsg}}</p>
+           </div>
+          </div>
         </div>
       </div>
 </body>
