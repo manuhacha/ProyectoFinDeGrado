@@ -163,7 +163,7 @@ export class ProfileComponent {
       this.playlisterr = 'You have to type a number between 1 and 100'
     }
     else {
-      this.Spotify.createPlaylist(this.spotifyuserid)
+      this.Spotify.createPlaylist(this.Spotifyuserid)
       .subscribe({
         next: (res) => {
           this.playlistid = res.id
@@ -200,5 +200,28 @@ export class ProfileComponent {
         }
       })
   }
+  }
+
+  createAlbum() {
+    this.Spotify.getAlbumbyId(this.albumid)
+    .subscribe({
+      next: (res) => {
+        this.newalbum.spotifyid = this.albumid
+        this.newalbum.name = res.name
+        this.newalbum.artist = res.artists[0].name
+        this.newalbum.date = res.release_date
+        this.newalbum.picture = res.images[0].url
+        this.newalbum.userid = this.updateUser.username
+        this.service.createCommunityAlbum(this.newalbum)
+          .subscribe({
+            next: (res) => {
+              location.reload()  
+            }
+          })
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
   }
 }
