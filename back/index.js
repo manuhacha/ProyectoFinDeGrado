@@ -8,11 +8,9 @@ const communityalbums = require('../back/routes/communityalbums')
 const cors = require('cors');
 const swaggerUi = require('swagger-ui-express');
 const swaggerJsdoc = require('swagger-jsdoc');
-
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 // Definimos las opciones de configuración para Swagger
 const options = {
     swaggerDefinition: {
@@ -43,8 +41,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 const port = process.env.PORT || 3000;
 app.listen(port, ()=> console.log('Listening on port: '+ port));
 console.log('Swagger hosted on: http://localhost:3000/api-docs')
-
 //Conexion con base de datos MongoDB
 mongoose.connect('mongodb://localhost/TFG', { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('Connected to MongoDB'))
+    .then(() => console.log('Connected to MongoDB'),)
     .catch(error => console.log(error));
+    

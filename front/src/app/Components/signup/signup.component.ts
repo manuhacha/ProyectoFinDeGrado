@@ -7,34 +7,44 @@ import { NgIf } from '@angular/common';
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,NgIf],
+  imports: [FormsModule, ReactiveFormsModule, NgIf],
   templateUrl: './signup.component.html',
-  styleUrl: './signup.component.css'
+  styleUrl: './signup.component.css',
 })
 export class SignupComponent {
-
   signUpUser = {
     username: '',
     email: '',
     password: '',
-    repeatpassword: ''
-  }
-  err:string = ''
+    repeatpassword: '',
+  };
+  err: string = '';
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private auth: AuthService, private router: Router) {}
 
   signUp() {
-    if (this.signUpUser.email && this.signUpUser.password && this.signUpUser.repeatpassword && this.signUpUser.username) {
-      this.auth.signUpUser(this.signUpUser)
-      .subscribe({
-        next: (res) => {
-          this.router.navigate(['/login'])
-        },
-        error: (err) => this.err = err.error
-      })
+    if (
+      this.signUpUser.email &&
+      this.signUpUser.password &&
+      this.signUpUser.repeatpassword &&
+      this.signUpUser.username
+    ) {
+      if (!this.validateEmail(this.signUpUser.email)) {
+        this.err = 'Email is not valid';
+      } else {
+        this.auth.signUpUser(this.signUpUser).subscribe({
+          next: (res) => {
+            this.router.navigate(['/login']);
+          },
+          error: (err) => (this.err = err.error),
+        });
+      }
+    } else {
+      this.err = 'All fields are required';
     }
-    else {
-      this.err = 'All fields are required'
-    }
+  }
+  validateEmail(email: string) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
   }
 }

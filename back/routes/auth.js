@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../models/User');
 const auth = require('../middleware/auth');
+require('dotenv').config();
+const crypto = require('crypto');
 /**
  * @swagger
  * tags:
@@ -39,10 +41,10 @@ const auth = require('../middleware/auth');
 //Método para autenticar al usuario
 router.post('/',async(req,res)=>{
     const user = await User.findOne({email: req.body.email});
-    
     //Verificamos si el usuario existe, y dentro si las contraseñas coinciden, si no se devuelve error
     if (user) {
-        if (user.password !== req.body.password) return res.status(400).send('Username or password are not correct');
+        let decryptedPassword = decryptPassword(user.password)    
+        if (decryptedPassword !== req.body.password) return res.status(400).send('Username or password are not correct');
 
         const jwtToken = user.generateJWT();
         res.status(200).send({jwtToken});
@@ -82,4 +84,11 @@ router.get('/', auth, async (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+function decryptPassword(encryptedPassword) {
+    const decipher = crypto.createDecipher('aes256', process.env.key);
+    const decryptedPassword = decipher.update(encryptedPassword, 'hex', 'utf8') + decipher.final('utf8');
+    return decryptedPassword;
+  }
+
 module.exports = router;

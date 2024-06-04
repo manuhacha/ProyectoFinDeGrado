@@ -4,38 +4,74 @@ const { User } = require("../models/User");
 const upload = require("../middleware/file");
 const fs = require('fs');
 const path = require('path');
-//Hacemos el get para poder obtener los datos del cliente, y mirar si su contraseña antigua es correcta, por ejemplo, al actualizar el usuario
-router.get("/:email", async (req, res) => {
-  try {
-    const { email } = req.params;
-    let user = await User.findOne({ email: email });
-
-    if (user) {
-      res.status(200).send(user);
-    } else {
-      res.status(400).send("User does not exists");
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
-
+require('dotenv').config();
+const crypto = require('crypto');
+/**
+ * @swagger
+ * tags:
+ *   name: Usuarios
+ *   description: Endpoint para la gestión de usuarios
+ */
+/**
+/**
+ * @swagger
+ * /api/v1/user:
+ *   post:
+ *     summary: Registra un nuevo usuario
+ *     description: Crea un nuevo usuario y lo guarda en la base de datos
+ *     tags: [Usuarios]
+ *     parameters:
+ *       - in: body
+ *         name: usuario
+ *         description: Datos del usuario
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             username:
+ *               type: string
+ *               description: Nombre de Usuario
+ *             email:
+ *               type: string
+ *               description: Email
+ *             password: 
+ *               type: string
+ *               description: Contraseña
+ *             repeatpassword:
+ *               type: string
+ *               description: Repetir contraseña
+ *     responses:
+ *       200:
+ *         description: Usuario registrado correctamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 jwtToken:
+ *                   type: string
+ *       400:
+ *         description: Error al registrar el usuario
+ */
 //Creamos el método post para registrar un usuario
 router.post("/", async (req, res) => {
   //Buscamos si existe el correo o el usuario
   let user = await User.findOne({ email: req.body.email });
   let usernameexists = await User.findOne({ username: req.body.username });
-
+  let encryptedPassword = ''
   //Devolvemos error si no existe el correo o usuario
   if (user || usernameexists)
     return res.status(400).send("Email or username already exists");
 
+  //Encriptamos la contraseña
+  encryptedPassword = encryptPassword(req.body.password)
+
+  //Creamos el usuario nuevo
   user = new User({
     profilepicture: req.body.profilepicture,
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
-    repeatpassword: req.body.repeatpassword,
+    password: encryptedPassword,
   });
 
   //Devolvemos error si las contraseñas no coinciden
@@ -50,12 +86,56 @@ router.post("/", async (req, res) => {
     res.status(200).send({ jwtToken });
   }
 });
+/**
+ * @swagger
+ * /api/v1/user/{id}:
+ *   put:
+ *     summary: Actualiza usuario
+ *     description: Actualiza usuario en la bbdd
+ *     tags: [Usuarios]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         description: Id del usuario
+ *         required: true
+ *         type: string
+ *       - in: body
+ *         name: usuario
+ *         description: Datos del usuario
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             profilepicture:
+ *               type: string
+ *               description: Foto de perfil
+ *             username:
+ *               type: string
+ *               description: Nombre de Usuario
+ *             email:
+ *               type: string
+ *               description: Email
+ *             oldpassword:
+ *               type: string
+ *               description: Contraseña antigua
+ *             password: 
+ *               type: string
+ *               description: Contraseña nueva
+ *             repeatnewpassword:
+ *               type: string
+ *               description: Repetir contraseña nueva
+ *     responses:
+ *       200:
+ *         description: Usuario actualizado
+ *       400:
+ *         description: Error al actualizar el usuario
+ */
 //Creamos la ruta put para actualizar los datos del usuario, que gestionaremos en el apartado de profile
 router.put("/:id", upload.single("image"), async (req, res) => {
   const { id } = req.params;
   const updateddata = req.body
   let profilepic = null;
-
+  let encryptedPassword = ''
   try {
     const usernameexists = await User.find({ username: req.body.username });
     const emailexists = await User.find({ email: req.body.email });
@@ -65,23 +145,30 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     ) {
       return res.status(400).send("Email or username already exists");
     }
+    // Sacamos los datos del usuario por id
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
     //Comprobamos las contraseñas
     if (req.body.oldpassword) {
       if (req.body.password !== req.body.repeatnewpassword) {
         return res.status(400).send("Passwords do not match");
       }
-      if (req.body.oldpassword !== usernameexists[0].password) {
+      if (req.body.oldpassword !== decryptPassword(user.password)) {
         return res.status(400).send("Old password is incorrect");
       }
       if (!req.body.password || !req.body.repeatnewpassword) {
         return res.status(400).send("New password is blank")
       }
     }
-    // Sacamos los datos del usuario por id
-    const user = await User.findById(id);
-    if (!user) {
-      return res.status(404).send("User not found");
+    //Si no ha rellenado contraseñas, se autocompletan con las que ya tiene
+    if (!req.body.oldpassword) {
+      updateddata.password = encryptPassword(user.password)
     }
+
+    //Ciframos la contraseña
+    updateddata.password = encryptPassword(req.body.password)
 
     // Sacamos la foto de perfil que ya tiene
     const haveprofilepic = user.profilepic;
@@ -106,13 +193,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     }
 
     // Actualizamos al usuario y enviamos todos los datos, o sin las contraseñas si no ha querido cambiarla
-    if (req.body.password) {
-      const updatedUser = await User.findByIdAndUpdate(id, updateddata);
-    }
-    else {
-      const updatedUser = await User.findByIdAndUpdate(id, {profilepic: updateddata.profilepic,email: updateddata.email,username: updateddata.username});
-
-    }
+    const updatedUser = await User.findByIdAndUpdate(id, updateddata);
     res.status(200).json("User updated successfully");
   } catch (error) {
     console.error(error);
@@ -120,5 +201,16 @@ router.put("/:id", upload.single("image"), async (req, res) => {
   }
 });
 
+//Método para cifrar la contraseña con AES 256
+function encryptPassword(password) {
+  const cipher = crypto.createCipher('aes256', process.env.key);
+  const encryptedPassword = cipher.update(password, 'utf8', 'hex') + cipher.final('hex');
+  return encryptedPassword;
+}
+function decryptPassword(encryptedPassword) {
+  const decipher = crypto.createDecipher('aes256', process.env.key);
+  const decryptedPassword = decipher.update(encryptedPassword, 'hex', 'utf8') + decipher.final('utf8');
+  return decryptedPassword;
+}
 
 module.exports = router;

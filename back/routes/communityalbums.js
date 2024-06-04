@@ -4,7 +4,7 @@ const { CommunityAlbums } = require("../models/CommunityAlbums");
 /**
  * @swagger
  * tags:
- *   name: CommunityAlbums
+ *   name: Community Albums
  *   description: Endpoint para la gestión de álbumes de la comunidad
  */
 /**
@@ -13,7 +13,7 @@ const { CommunityAlbums } = require("../models/CommunityAlbums");
  *   get:
  *     summary: Devuelve todos los álbumes de la comunidad
  *     description: Devuelve todos los álbumes de la comunidad de la BBDD
- *     tags: [CommunityAlbums]
+ *     tags: [Community Albums]
  *     responses:
  *       200:
  *         description: Devuelve los álbumes de la comunidad
@@ -40,7 +40,7 @@ router.get("/", async (req, res) => {
  *   get:
  *     summary: Devuelve los albumes de la comunidad
  *     description: Devuelve los albumes de la comunidad por id
- *     tags: [CommunityAlbums]
+ *     tags: [Community Albums]
  *     parameters:
  *       - in: path
  *         name: userId
@@ -74,7 +74,7 @@ router.get("/:userid", async (req, res) => {
  *   post:
  *     summary: Crea un album de la comunidad
  *     description: Crea un album de la comunidad y lo sube a la bbdd
- *     tags: [CommunityAlbums]
+ *     tags: [Community Albums]
  *     parameters:
  *       - in: body
  *         name: communityalbum
@@ -146,7 +146,7 @@ router.post("/", async (req, res) => {
  *   delete:
  *     summary: Borra un Álbum de la Comunidad
  *     description: 
- *     tags: [CommunityAlbums]
+ *     tags: [Community Albums]
  *     parameters:
  *       - in: path
  *         name: id
