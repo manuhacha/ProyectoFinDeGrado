@@ -5,7 +5,7 @@ const { Artist } = require("../models/Artist");
  * @swagger
  * tags:
  *   name: Artists
- *   description: Autenticación de Usuario
+ *   description: Endpoint para la gestión de artistas
  */
 /**
  * @swagger
@@ -34,6 +34,39 @@ router.get("/", async (req, res) => {
       res.status(500).send("Internal Server Error"); // Manejo de errores
   }
 });
+/**
+ * @swagger
+ * /api/v1/artist:
+ *   post:
+ *     summary: Crea un artista
+ *     description: Crea un artista y lo sube a la bbdd 
+ *     tags: [Artists]
+ *     parameters:
+ *       - in: body
+ *         name: artist
+ *         description: Datos del artista
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
+ *               description: Nombre
+ *             genre:
+ *               type: string
+ *               description: Género
+ *             picture:
+ *               type: string
+ *               description: Foto
+ *             link:
+ *               type: string
+ *               description: Enlace
+ *     responses:
+ *       200:
+ *         description: Crea al artista
+ *       400:
+ *         description: Error al crear el artista
+ */
 //Creamos el método post para subir artistas
 router.post("/", async (req, res) => {
 
@@ -49,7 +82,7 @@ router.post("/", async (req, res) => {
         res.status(200).json("Artist saved succesfully");
       }
       catch (error) {
-        res.status(400).send("Error savin artists")
+        res.status(400).send("Error saving artists")
       }
     }); 
     

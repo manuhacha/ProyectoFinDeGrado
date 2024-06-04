@@ -1,7 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const { CommunityAlbums } = require("../models/CommunityAlbums");
-
+/**
+ * @swagger
+ * tags:
+ *   name: CommunityAlbums
+ *   description: Endpoint para la gestión de álbumes de la comunidad
+ */
+/**
+ * @swagger
+ * /api/v1/communityalbums:
+ *   get:
+ *     summary: Devuelve todos los álbumes de la comunidad
+ *     description: Devuelve todos los álbumes de la comunidad de la BBDD
+ *     tags: [CommunityAlbums]
+ *     responses:
+ *       200:
+ *         description: Devuelve los álbumes de la comunidad
+ *       400:
+ *         description: No hay álbumes de la comunidad
+ */
 // Ruta get para obtener todos los albumes
 router.get("/", async (req, res) => {
   try {
@@ -16,7 +34,25 @@ router.get("/", async (req, res) => {
       res.status(500).send("Internal Server Error"); // Manejo de errores
   }
 });
-
+/**
+ * @swagger
+ * /api/v1/communityalbums/{userId}:
+ *   get:
+ *     summary: Devuelve los albumes de la comunidad
+ *     description: Devuelve los albumes de la comunidad por id
+ *     tags: [CommunityAlbums]
+ *     parameters:
+ *       - in: path
+ *         name: userId
+ *         description: Id del usuario
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Devuelve el álbum
+ *       400:
+ *         description: El usuario no tiene álbumes*
+ */
 //Hacemos el get para poder obtener los albumes de un usuario específico
 router.get("/:userid", async (req, res) => {
     try {
@@ -32,13 +68,52 @@ router.get("/:userid", async (req, res) => {
       console.log(error);
     }
   });
-
+/**
+ * @swagger
+ * /api/v1/communityalbums:
+ *   post:
+ *     summary: Crea un album de la comunidad
+ *     description: Crea un album de la comunidad y lo sube a la bbdd
+ *     tags: [CommunityAlbums]
+ *     parameters:
+ *       - in: body
+ *         name: communityalbum
+ *         description: Datos del álbum
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             name:
+ *               type: string
+ *               description: Nombre
+ *             artist:
+ *               type: string
+ *               description: Artista
+ *             date:
+ *               type: string
+ *               description: Fecha
+ *             picture: 
+ *               type: string
+ *               description: Foto
+ *             spotifyid:
+ *               type: string
+ *               description: Id de Spotify
+ *             userid:
+ *               type: string
+ *               description: Id de Usuario
+ *             link:
+ *               type: string
+ *               description: Enlace
+ *     responses:
+ *       200:
+ *         description: El álbum se ha creado
+ *       400:
+ *         description: Erroral crear el álbum
+ */
 //Creamos el método post para subir albumes
 router.post("/", async (req, res) => {
 
   let hasanalbum = await CommunityAlbums.findOne({ userid: req.body.userid });
-
-  console.log(hasanalbum)
   //Vemos si el usuario ya tiene un album
   if (hasanalbum) {
     res.status(400).json("You already have an album uploaded")
@@ -65,6 +140,25 @@ router.post("/", async (req, res) => {
       }
   }
     }); 
+    /**
+ * @swagger
+ * /api/v1/communityalbums/{id}:
+ *   delete:
+ *     summary: Borra un Álbum de la Comunidad
+ *     description: 
+ *     tags: [CommunityAlbums]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: Id del álbum
+ *         required: true
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Se ha borrado el álbum
+ *       400:
+ *         description: Error al borrar el álbum
+ */
     //Metodo para borrar el usuario
     router.delete('/:id', async (req, res) => {
       try {
