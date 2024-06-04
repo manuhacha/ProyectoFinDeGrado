@@ -1,7 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const { Artist } = require("../models/Artist");
-
+/**
+ * @swagger
+ * tags:
+ *   name: Artists
+ *   description: Autenticación de Usuario
+ */
+/**
+ * @swagger
+ * /api/v1/artist:
+ *   get:
+ *     summary: Devuelve todos los artistas
+ *     description: Devuelve todos los artistas de la BBDD
+ *     tags: [Artists]
+ *     responses:
+ *       200:
+ *         description: Devuelve los artistas
+ *       400:
+ *         description: No hay artistas
+ */
 // Ruta get para obtener todos los artistas
 router.get("/", async (req, res) => {
   try {

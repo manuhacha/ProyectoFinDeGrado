@@ -1,7 +1,42 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../models/User');
-const auth = require('../middleware/auth')
+const auth = require('../middleware/auth');
+/**
+ * @swagger
+ * tags:
+ *   name: Auth
+ *   description: Autenticación de Usuario
+ */
+/**
+ * @swagger
+ * /api/v1/auth:
+ *   post:
+ *     summary: Loggea a un Usuario
+ *     description: Loggea a un Usuario y devuelve el token JWT
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: body
+ *         name: user
+ *         description: Datos del usuario para autenticación
+ *         required: true
+ *         schema:
+ *           type: object
+ *           properties:
+ *             email:
+ *               type: string
+ *               format: email
+ *               description: Correo electrónico del usuario
+ *             password:
+ *               type: string
+ *               description: Contraseña del usuario
+ *     responses:
+ *       200:
+ *         description: Devuelve el token JWT
+ *       400:
+ *         description: El usuario no existe o las credenciales son incorrectas
+ */
+//Método para autenticar al usuario
 router.post('/',async(req,res)=>{
     const user = await User.findOne({email: req.body.email});
     
@@ -16,6 +51,27 @@ router.post('/',async(req,res)=>{
         res.status(400).send('User does not exist')
     }
 })
+/**
+ * @swagger
+ * /api/v1/auth:
+ *   get:
+ *     summary: Devuelve la informacion de un usuario
+ *     description: Devuelve la informacion de un usuario a partir de su JWT
+ *     tags: [Auth]
+ *     parameters:
+ *       - in: header
+ *         name: Authorizations
+ *         description: Token del usuario
+ *         required: true
+ *         schema:
+ *           type: string
+ *           example: Bearer <token>
+ *     responses:
+ *       200:
+ *         description: Devuelve la información
+ *       400:
+ *         description: No encuentra al usuario
+ */
 //Metodo get para obtener usuario a partir del token, pasando por nuestro middleware auth
 router.get('/', auth, async (req, res) => {
     try {

@@ -76,7 +76,7 @@
           </div>
           <div class="tab-pane addwork fade" id="v-pills-addwork" role="tabpanel" aria-labelledby="v-pills-addwork-tab">
             <div class="formulario container-fluid d-flex justify-content-center">
-              <form class="form border border-white mb-5 text-white p-5 rounded-3 bg-black">
+              <form class="form border w-100 border-white mb-5 text-white p-5 rounded-3 bg-black">
                 <div class="mb-3 text-center">
                   <p class="text-success">Enter your Spotify Album Id</p>
                   <p class="text-success">Remember you can only have one album uploaded</p>
@@ -90,8 +90,8 @@
               </form>
             </div>
           </div>
-          <div class="tab-pane youralbums fade" id="v-pills-youralbums" role="tabpanel" aria-labelledby="v-pills-youralbums-tab">
-            <div *ngIf="useralbums && useralbums.length > 0" class="row w-100">
+          <div class="tab-pane youralbums fade w-100 border border-white bg-black rounded-3" id="v-pills-youralbums" role="tabpanel" aria-labelledby="v-pills-youralbums-tab">
+            <div *ngIf="useralbums && useralbums.length > 0" class="row m-5">
               <div class="col-md-auto d-flex flex-column mx-auto communityalbums" *ngFor="let album of useralbums">
                 <div class="card albums mx-auto border border-dark" style="width: 25rem">
                   <img [src]="album.picture" class="card-img-top" width="400px" alt="Album Cover"/>
