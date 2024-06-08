@@ -1,0 +1,1 @@
+Para ejecutar la aplicación, entramos en la carpeta back y hacemos npm run start, para el front, nos metemos en la carpeta front y hacemos ng s -o

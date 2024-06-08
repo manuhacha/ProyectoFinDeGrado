@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../models/User");
 const upload = require("../middleware/file");
-const fs = require('fs');
-const path = require('path');
-require('dotenv').config();
-const crypto = require('crypto');
+const fs = require("fs");
+const path = require("path");
+require("dotenv").config();
+const crypto = require("crypto");
 /**
  * @swagger
  * tags:
@@ -58,13 +58,13 @@ router.post("/", async (req, res) => {
   //Buscamos si existe el correo o el usuario
   let user = await User.findOne({ email: req.body.email });
   let usernameexists = await User.findOne({ username: req.body.username });
-  let encryptedPassword = ''
+  let encryptedPassword = "";
   //Devolvemos error si no existe el correo o usuario
   if (user || usernameexists)
     return res.status(400).send("Email or username already exists");
 
   //Encriptamos la contraseña
-  encryptedPassword = encryptPassword(req.body.password)
+  encryptedPassword = encryptPassword(req.body.password);
 
   //Creamos el usuario nuevo
   user = new User({
@@ -118,7 +118,7 @@ router.post("/", async (req, res) => {
  *             oldpassword:
  *               type: string
  *               description: Contraseña antigua
- *             password: 
+ *             password:
  *               type: string
  *               description: Contraseña nueva
  *             repeatnewpassword:
@@ -133,15 +133,17 @@ router.post("/", async (req, res) => {
 //Creamos la ruta put para actualizar los datos del usuario, que gestionaremos en el apartado de profile
 router.put("/:id", upload.single("image"), async (req, res) => {
   const { id } = req.params;
-  const updateddata = req.body
+  const updateddata = req.body;
   let profilepic = null;
-  let encryptedPassword = ''
+  let encryptedPassword = "";
   try {
     const usernameexists = await User.find({ username: req.body.username });
     const emailexists = await User.find({ email: req.body.email });
 
     //Vemos si hay otro usuario con ese correo o nombre de usuario
-    if ((usernameexists.length > 0 && usernameexists[0]._id.toString() !== id) ||(emailexists.length > 0 && emailexists[0]._id.toString() !== id)
+    if (
+      (usernameexists.length > 0 && usernameexists[0]._id.toString() !== id) ||
+      (emailexists.length > 0 && emailexists[0]._id.toString() !== id)
     ) {
       return res.status(400).send("Email or username already exists");
     }
@@ -159,37 +161,39 @@ router.put("/:id", upload.single("image"), async (req, res) => {
         return res.status(400).send("Old password is incorrect");
       }
       if (!req.body.password || !req.body.repeatnewpassword) {
-        return res.status(400).send("New password is blank")
+        return res.status(400).send("New password is blank");
+      } else {
+        //Ciframos la contraseña
+        updateddata.password = encryptPassword(req.body.password);
       }
     }
     //Si no ha rellenado contraseñas, se autocompletan con las que ya tiene
     if (!req.body.oldpassword) {
-      updateddata.password = encryptPassword(user.password)
+      user.password = decryptPassword(user.password);
+      updateddata.password = encryptPassword(user.password);
     }
-
-    //Ciframos la contraseña
-    updateddata.password = encryptPassword(req.body.password)
 
     // Sacamos la foto de perfil que ya tiene
     const haveprofilepic = user.profilepic;
 
     if (req.file && req.file.filename) {
-      profilepic = req.protocol + "://" + req.get("host") + "/public/" + req.file.filename;
+      profilepic =
+        req.protocol + "://" + req.get("host") + "/public/" + req.file.filename;
       updateddata.profilepic = profilepic; // Añadimos la foto a los datos que vamos a actualizar
       // Vemos si el usuario tiene una foto de perfil ya asignada
       if (haveprofilepic && haveprofilepic !== profilepic) {
-      // Sacamos el nombre del archivo
-      const filename = haveprofilepic.split("/").pop();
-      // Contruimos la ruta del archivo
-      const filePath = path.join(__dirname, "../public", filename);
+        // Sacamos el nombre del archivo
+        const filename = haveprofilepic.split("/").pop();
+        // Contruimos la ruta del archivo
+        const filePath = path.join(__dirname, "../public", filename);
 
-      // Borramos la foto
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error("Error deleting file:", err);
-        }
-      });
-    }
+        // Borramos la foto
+        fs.unlink(filePath, (err) => {
+          if (err) {
+            console.error("Error deleting file:", err);
+          }
+        });
+      }
     }
 
     // Actualizamos al usuario y enviamos todos los datos, o sin las contraseñas si no ha querido cambiarla
@@ -203,13 +207,15 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 
 //Método para cifrar la contraseña con AES 256
 function encryptPassword(password) {
-  const cipher = crypto.createCipher('aes256', process.env.key);
-  const encryptedPassword = cipher.update(password, 'utf8', 'hex') + cipher.final('hex');
+  const cipher = crypto.createCipher("aes256", process.env.key);
+  const encryptedPassword =
+    cipher.update(password, "utf8", "hex") + cipher.final("hex");
   return encryptedPassword;
 }
 function decryptPassword(encryptedPassword) {
-  const decipher = crypto.createDecipher('aes256', process.env.key);
-  const decryptedPassword = decipher.update(encryptedPassword, 'hex', 'utf8') + decipher.final('utf8');
+  const decipher = crypto.createDecipher("aes256", process.env.key);
+  const decryptedPassword =
+    decipher.update(encryptedPassword, "hex", "utf8") + decipher.final("utf8");
   return decryptedPassword;
 }
 

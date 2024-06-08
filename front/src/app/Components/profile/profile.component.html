@@ -49,29 +49,32 @@
             </div>
           </div>
           <div class="tab-pane fade playlists" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-            <div class="w-100 createplaylist bg-black border border-white rounded-3">
-              <form class="form">
-                <div class="subgenres form-group text-center w-100">
-                  <label class="mx-1" for="subgenre">Select Subgenres:</label>
-                  <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-dark dropdown-toggle mx-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subgenres</button>
-                    <div class="dropdown-menu" aria-labelledby="subgenre">
-                      <div class="dropdown-item form-group" *ngFor="let genre of genres">
-                        <input type="radio" name="genre" [(ngModel)]="selectedGenre" [value]="genre.name" (change)="onRadioChange(genre.name)" />
-                        <label for="fwave">{{ genre.name }}</label>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <input type="number" [(ngModel)]="numerocanciones" name="numerocanciones" class="form-control mx-1 w-100" placeholder="Number of Songs 1-100">
-                    </div>
-                  </div>
-                </div>
-              </form>
-              <p *ngIf="playlisterr" class="error text-center text-danger mt-4">{{this.playlisterr}}</p>
-              <p *ngIf="playlistmsg" class="text-center text-success mt-4">{{this.playlistmsg}}</p>
-              <div class="createbutton mx-auto text-center mt-5"><button (click)="createPlaylist()" class="playlists-button btn btn-primary">Create Spotify Playlist</button></div>
+  <div class="w-100 createplaylist bg-black border border-white rounded-3">
+    <form class="form">
+      <div class="subgenres form-group text-center w-100">
+        <label class="mx-1" for="subgenre">Select Subgenres:</label>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-dark dropdown-toggle mx-1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Subgenres</button>
+          <div class="dropdown-menu" aria-labelledby="subgenre">
+            <div class="dropdown-item form-group" *ngFor="let genre of genres">
+              <input type="radio" class="form-control" name="genre" [(ngModel)]="selectedGenre" [value]="genre.name" (change)="onRadioChange(genre.name)" />
+              <label for="fwave">{{ genre.name }}</label>
             </div>
           </div>
+        </div>
+        <div class="form-group mt-3">
+          <input type="number" [(ngModel)]="numerocanciones" name="numerocanciones" class="form-control mx-1" placeholder="Number of Songs 1-100">
+        </div>
+      </div>
+    </form>
+    <p *ngIf="playlisterr" class="error text-center text-danger mt-4">{{this.playlisterr}}</p>
+    <p *ngIf="playlistmsg" class="text-center text-success mt-4">{{this.playlistmsg}}</p>
+    <div class="createbutton mx-auto text-center mt-5">
+      <button (click)="createPlaylist()" class="playlists-button btn btn-primary">Create Spotify Playlist</button>
+    </div>
+  </div>
+</div>
+
           <div class="tab-pane addwork fade" id="v-pills-addwork" role="tabpanel" aria-labelledby="v-pills-addwork-tab">
             <div class="formulario container-fluid d-flex justify-content-center">
               <form class="form border w-100 border-white mb-5 text-white p-5 rounded-3 bg-black">
@@ -88,11 +91,11 @@
               </form>
             </div>
           </div>
-          <div class="tab-pane youralbums fade w-100 border border-white bg-black rounded-3" id="v-pills-youralbums" role="tabpanel" aria-labelledby="v-pills-youralbums-tab">
+          <div class="tab-pane youralbums w-100 fade border border-white bg-black rounded-3" id="v-pills-youralbums" role="tabpanel" aria-labelledby="v-pills-youralbums-tab">
             <div *ngIf="useralbums && useralbums.length > 0" class="row m-5">
               <div class="col-md-auto d-flex flex-column mx-auto communityalbums" *ngFor="let album of useralbums">
-                <div class="card albums mx-auto border border-dark" style="width: 25rem">
-                  <img [src]="album.picture" class="card-img-top" width="400px" alt="Album Cover"/>
+                <div class="card albums mx-auto border border-dark">
+                  <img [src]="album.picture" class="card-img-top" style="max-width: 400px;" alt="Album Cover"/>
                   <div class="card-body mx-auto text-center">
                     <h2 class="card-title">{{ album.name }}</h2>
                     <p class="card-text">{{ album.artist }}</p>
