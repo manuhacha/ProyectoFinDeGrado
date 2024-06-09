@@ -14,7 +14,7 @@
     </form>
   </div>
   <div class="row w-100">
-    <div class="col-md-auto d-flex flex-column mx-auto" *ngFor="let album of albums">
+    <div class="col-md-auto d-flex flex-column mx-auto" *ngFor="let album of paginatedAlbums">
       <div class="card albums mx-auto border border-dark" style="width: 25rem">
         <img [src]="album.picture" class="card-img-top" width="400px" alt="Album Cover"/>
         <div class="card-body mx-auto text-center">
