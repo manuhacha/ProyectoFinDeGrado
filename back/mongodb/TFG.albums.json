@@ -85,4 +85,92 @@
   "picture": "https://i.scdn.co/image/ab67616d0000b27307689efddb1e40e440d76007",
   "spotifyid": "5OEz7YwAQyYvaSl1pmkPCI",
   "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6656200bd52e9148279eb342"
+  },
+  "name": "The Somberlain",
+  "artist": "Dissection",
+  "date": "1993-04-27",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273a71b7074f0f4b217e303fd20",
+  "spotifyid": "3mIbmrD3xW9NFSRMa2D8GX",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "666571fcb4141d3eab9bb456"
+  },
+  "name": "Deathcrush",
+  "artist": "Mayhem",
+  "date": "1993",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273d4574c5b72cc948ddd0eff10",
+  "spotifyid": "2RxBdrvHKwgx57RKrNQ9hz",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66657221b4141d3eab9bb45b"
+  },
+  "name": "MARIA",
+  "artist": "Batushka",
+  "date": "2022-03-30",
+  "picture": "https://i.scdn.co/image/ab67616d0000b2736cee81a7d914fbd82f7f4def",
+  "spotifyid": "5XRR2Lnc7grEl7FXyrS0qz",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66657243b4141d3eab9bb460"
+  },
+  "name": "A Blaze In The Northern Sky",
+  "artist": "Darkthrone",
+  "date": "1992-02-26",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273754029bf280ce924ef682664",
+  "spotifyid": "4ywDt046dDB2OtWLqKwvMF",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6665726eb4141d3eab9bb465"
+  },
+  "name": "The Dread March of Solemn Gods",
+  "artist": "Ninkharsag",
+  "date": "2021-04-30",
+  "picture": "https://i.scdn.co/image/ab67616d0000b2733a66535900f6084ce3b5d33e",
+  "spotifyid": "6egmAoEuLujuW9kw57jqzG",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6665733ab4141d3eab9bb471"
+  },
+  "name": "Enthrone Darkness Triumphant",
+  "artist": "Dimmu Borgir",
+  "date": "1997-05-30",
+  "picture": "https://i.scdn.co/image/ab67616d0000b2733e470f11b0a73cd99d4bb6b5",
+  "spotifyid": "2vsIQw5nIfbO2N4X6pfXU9",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66657354b4141d3eab9bb476"
+  },
+  "name": "1184",
+  "artist": "Windir",
+  "date": "2002-06-12",
+  "picture": "https://i.scdn.co/image/ab67616d0000b273eed5a8b7edfd7d53811290e4",
+  "spotifyid": "1tl1oov2DNSZou6LMtElC6",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66657370b4141d3eab9bb47b"
+  },
+  "name": "In The Sign... (Re-issue + Bonus) [Deluxe Version]",
+  "artist": "Dark Funeral",
+  "date": "1996-01-28",
+  "picture": "https://i.scdn.co/image/ab67616d0000b2734688538798418af17befd9c8",
+  "spotifyid": "3rG83VdcvygOrL6BJGYitt",
+  "__v": 0
 }]

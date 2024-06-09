@@ -80,26 +80,6 @@
 },
 {
   "_id": {
-    "$oid": "6644c3165f9f2e4403b11da2"
-  },
-  "name": "Blut Aus Nord",
-  "genre": "atmospheric black metal, avant-garde black metal, black metal",
-  "picture": "https://i.scdn.co/image/029b877f7f45df775b0029c3d87de1fe3b01c169",
-  "link": "https://open.spotify.com/artist/0c0xIXQhCbmtvzM93liaSf",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6644c3165f9f2e4403b11da4"
-  },
-  "name": "None",
-  "genre": "atmospheric black metal, cascadian black metal",
-  "picture": "https://i.scdn.co/image/ab6761610000e5eb7b3d2df815050bc169c05e24",
-  "link": "https://open.spotify.com/artist/2ZO5sFPyILDQkFdS4HJPFS",
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "6644c3165f9f2e4403b11da8"
   },
   "name": "Beherit",
@@ -390,32 +370,12 @@
 },
 {
   "_id": {
-    "$oid": "6644c3165f9f2e4403b11de0"
-  },
-  "name": "Iván Ferrús",
-  "genre": "atmospheric black metal, cosmic black metal",
-  "picture": "https://i.scdn.co/image/ab6761610000e5eb4f6fb95b08f9b535a9f3e96d",
-  "link": "https://open.spotify.com/artist/4DtXLPkKXCormBHlZzDm8c",
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "6644c3165f9f2e4403b11de2"
   },
   "name": "Northland",
   "genre": "folk metal, metal catala, spanish folk metal",
   "picture": "https://i.scdn.co/image/ab67616d0000b27365c752ced373e8ebf8df549c",
   "link": "https://open.spotify.com/artist/01oX6jHYsrwwoZE33DTTaY",
-  "__v": 0
-},
-{
-  "_id": {
-    "$oid": "6644c3165f9f2e4403b11de4"
-  },
-  "name": "Warg",
-  "genre": "",
-  "picture": "https://i.scdn.co/image/ab6761610000e5eb7a782fc1442ba871a7f3eb08",
-  "link": "https://open.spotify.com/artist/5tza5SA5V9A6oB7QZbswuS",
   "__v": 0
 },
 {
@@ -460,21 +420,21 @@
 },
 {
   "_id": {
-    "$oid": "6644c3165f9f2e4403b11dee"
-  },
-  "name": "VLTIMAS",
-  "genre": "black death",
-  "picture": "https://i.scdn.co/image/ab6761610000e5eb0f9f845330e0f77ac522d68f",
-  "link": "https://open.spotify.com/artist/0kZ64zYv2xtKdhbOzTPdWA",
-  "__v": 0
-},
-{
-  "_id": {
     "$oid": "6644c3165f9f2e4403b11df0"
   },
   "name": "Ancst",
   "genre": "blackened crust, blackened hardcore, neo-crust",
   "picture": "https://i.scdn.co/image/ab6761610000e5eb5cf2b6490e5753ea18694966",
   "link": "https://open.spotify.com/artist/5zGxYEPyynjUkIBgKRI1Wt",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "664790888c2df442a0a53255"
+  },
+  "name": "Darkthrone",
+  "genre": "black 'n' roll, black metal, blackened crust",
+  "picture": "https://i.scdn.co/image/ab6761610000e5eb79320f5cf422d8a8e98836c4",
+  "link": "https://open.spotify.com/artist/7kWnE981vITXDnAD2cZmCV",
   "__v": 0
 }]
